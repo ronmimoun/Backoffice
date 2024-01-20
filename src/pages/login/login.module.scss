@@ -1,0 +1,14 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background-color: $soft-bg;
+    padding: 1.25rem;
+    border-radius: 12px;
+}

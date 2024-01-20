@@ -1,0 +1,14 @@
+@import "../../assets/styles/responsive.scss";
+
+.container {
+    display: flex;
+
+    @include lg {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    &__horizontal {
+        margin: 0 1rem;
+    }
+}

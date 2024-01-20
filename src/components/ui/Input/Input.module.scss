@@ -1,0 +1,32 @@
+@import '../../../assets/styles/variables.scss';
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &__input {
+        background: #fff;
+        color: #6e6e6e;
+        line-height: 1.5;
+        font-size: 13px;
+        height: 2.5rem;
+        border-radius: 0.375rem;
+        border-color: #CCCCCC;
+        padding: 0.35rem 0.8rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__label {}
+
+    &__error {
+        margin: 0 !important;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        color: $danger-color;
+    }
+}

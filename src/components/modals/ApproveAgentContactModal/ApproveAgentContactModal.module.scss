@@ -1,0 +1,11 @@
+.form {
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &_width_100 {
+    width: 100%;
+  }
+}

@@ -1,0 +1,17 @@
+@import '../../../assets/styles/variables.scss';
+
+.button_primary {
+    display: flex;
+    align-items: center;
+    color: $main-color;
+    padding: 0.625rem 1rem;
+    font-size: 0.813rem;
+    border-color: $primary-button-bg;
+    background-color: $primary-button-bg;
+}
+
+.loader {
+    & svg {
+        color: $main-color;
+    }
+}
