@@ -1,0 +1,33 @@
+@import '/src/assets/styles/variables.scss';
+
+.message {
+    display: flex !important;
+    align-items: flex-end !important;
+    flex-direction: column;
+
+    &__my_message {
+        align-items: flex-start !important;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+
+        &__date {
+            color: $soft-color;
+            font-size: 0.8rem;
+        }
+    }
+
+    &__content {
+        background-color: $dark-bg;
+        border-radius: $default-br;
+        line-height: 1.8571rem;
+        padding: 1.2857rem 1.4285rem;
+        max-width: 25rem;
+    }
+
+
+}

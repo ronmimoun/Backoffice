@@ -1,0 +1,35 @@
+@import '/src/assets/styles/variables.scss';
+
+.messages_wrapper {
+    width: 100%;
+    position: relative;
+    margin-inline-start: 1.4285rem;
+}
+
+.messages_list {
+    overflow-y: auto;
+    height: 90%;
+    margin-bottom: 2.1428rem;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    &__input {
+        margin-bottom: 0 !important;
+        width: 100%;
+    }
+}
+
+.message_header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: $default-border;
+    padding: 1rem 1.4285rem;
+}

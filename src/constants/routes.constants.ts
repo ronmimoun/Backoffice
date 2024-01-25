@@ -56,4 +56,9 @@ export namespace ROUTES {
     export const ROUTE_NAME = "agent-contact-request";
     export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
   }
+
+  export namespace SUPPORT_CHAT_PAGE {
+    export const ROUTE_NAME = "support-chat";
+    export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
+  }
 }

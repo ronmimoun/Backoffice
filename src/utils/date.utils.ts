@@ -25,7 +25,21 @@ function getFormattedDate(
   return moment(date).format(format);
 }
 
+function formatTime(date: Date): string {
+  const now = moment();
+  const targetDate = moment(date);
+
+  // Check if the date is today
+  if (now.isSame(targetDate, "day")) {
+    return targetDate.format("h:mm A, [Today]");
+  } else {
+    // For a date that is not today, you can customize the format as needed
+    return targetDate.format("h:mm A, MMM D");
+  }
+}
+
 export const dateUtilService = {
   formatMostRecentDate,
   getFormattedDate,
+  formatTime,
 };

@@ -28,6 +28,7 @@ import { categoryManagerActions } from "../store/categoryManager/categoryManager
 import { globalThunkActions } from "../store/global/global.thunk-builder";
 import ContactsFeedback from "../pages/ContactsFeedback/ContactsFeedback";
 import AgentContactRequest from "../pages/AgentContactRequest/AgentContactRequest";
+import SupportChat from "../pages/SupportChat/SupportChat";
 
 const MainRouterProvider = () => {
   const Layout = () => {
@@ -100,6 +101,10 @@ const MainRouterProvider = () => {
         {
           path: ROUTES.AGENT_CONTACT_REQUEST_PAGE.FULL_ROUTE_NAME,
           element: <AgentContactRequest />,
+        },
+        {
+          path: ROUTES.SUPPORT_CHAT_PAGE.FULL_ROUTE_NAME,
+          element: <SupportChat />,
         },
       ],
     },

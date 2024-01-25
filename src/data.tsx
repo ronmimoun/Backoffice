@@ -8,6 +8,7 @@ import { PermContactCalendar } from "@mui/icons-material";
 import { ThumbUpAlt } from "@mui/icons-material";
 import { SupportAgent } from "@mui/icons-material";
 import { Email } from "@mui/icons-material";
+import { QuestionAnswer } from "@mui/icons-material";
 
 export const menu = [
   {
@@ -49,6 +50,12 @@ export const menu = [
         title: "Pending Users",
         url: ROUTES.PENDING_USERS_PAGE.FULL_ROUTE_NAME,
         icon: <Pending />,
+      },
+      {
+        id: 5,
+        title: "Support Chat",
+        url: ROUTES.SUPPORT_CHAT_PAGE.FULL_ROUTE_NAME,
+        icon: <QuestionAnswer />,
       },
     ],
   },

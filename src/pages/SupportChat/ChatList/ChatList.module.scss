@@ -1,0 +1,30 @@
+@import '/src/assets/styles/variables.scss';
+
+.chat_list:global(.MuiList-root) {
+    padding: 0;
+    padding-inline-end: 1.4285rem;
+}
+
+.chat_list {
+    min-width: 14rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-inline-end: $default-border;
+    overflow-y: auto;
+}
+
+.chat {
+    display: flex;
+    gap: 0.5rem;
+    border-radius: $element-br;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $soft-bg;
+    }
+
+    &_selected {
+        background-color: $soft-bg;
+    }
+}

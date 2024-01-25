@@ -8,7 +8,7 @@ import {
 import { UploadResponse } from "../../models/file/upload/upload.response";
 import { UploadRequest } from "../../models/file/upload/upload.request";
 
-const fileHttpInstace = createManagedAxiosInstance(
+const fileHttpInstance = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
 );
 
@@ -24,7 +24,7 @@ const upload = async (
     },
   };
 
-  const response = await fileHttpInstace.managedRequest<UploadResponse>(
+  const response = await fileHttpInstance.managedRequest<UploadResponse>(
     options
   );
   return response;

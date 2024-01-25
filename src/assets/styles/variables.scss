@@ -10,9 +10,17 @@ $dark-color: #2a3447;
 $secondary-color: #2C2C2C;
 $danger-color: #c41c1c;
 
+$message-color: #434651;
+
 // border-radius
 $input-border-radius: 0.3rem;
 $button-br: 0.3rem;
+$element-br: 0.3571rem;
+$default-br: 0.5rem;
+
+
+// BORDER
+$default-border: 1px solid #{$soft-bg};
 
 // BUTTON
 $primary-button-bg: #0d99ff;
