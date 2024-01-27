@@ -10,6 +10,7 @@ import { SupportAgent } from "@mui/icons-material";
 import { Email } from "@mui/icons-material";
 import { QuestionAnswer } from "@mui/icons-material";
 import { RecentActors } from "@mui/icons-material";
+import { SettingsSuggest } from "@mui/icons-material";
 
 export const menu = [
   {
@@ -99,6 +100,18 @@ export const menu = [
         title: "Agent's Messages",
         url: ROUTES.AGENT_MESSAGES_PAGE.FULL_ROUTE_NAME,
         icon: <Email />,
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "configurations",
+    listItems: [
+      {
+        id: 1,
+        title: "Manager",
+        url: ROUTES.CONFIGURATION_MANAGER_PAGE.FULL_ROUTE_NAME,
+        icon: <SettingsSuggest />,
       },
     ],
   },

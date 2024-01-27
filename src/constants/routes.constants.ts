@@ -66,4 +66,9 @@ export namespace ROUTES {
     export const ROUTE_NAME = "add-company-contacts";
     export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
   }
+
+  export namespace CONFIGURATION_MANAGER_PAGE {
+    export const ROUTE_NAME = "configuration-manager";
+    export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
+  }
 }

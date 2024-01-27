@@ -26,23 +26,22 @@ export const Input = ({
 
   return (
     <div className={`mb-1 ${classes.container} ${className}`}>
-      {label ||
-        (errors[name] && (
-          <div className={classes.container__label}>
-            {label && (
-              <label htmlFor="">
-                {required ? "*" : ""}
-                {label}
-              </label>
-            )}
-            {errors[name] && (
-              <p className={classes.container__error}>
-                <ErrorIcon />
-                {errors[name]?.message as string}
-              </p>
-            )}
-          </div>
-        ))}
+      {label && (
+        <div className={classes.container__label}>
+          {label && (
+            <label>
+              {required ? "*" : ""}
+              {label}
+            </label>
+          )}
+          {errors[name] && (
+            <p className={classes.container__error}>
+              <ErrorIcon />
+              {errors[name]?.message as string}
+            </p>
+          )}
+        </div>
+      )}
       <input
         required={required}
         className={classes.container__input}
