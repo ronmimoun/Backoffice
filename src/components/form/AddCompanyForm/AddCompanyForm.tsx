@@ -12,7 +12,7 @@ import {
   ADD_COMPANY_CONFIG,
   ADD_COMPANY_SCHEMA,
   AddCompanyFormType,
-} from "../../../form/schemas/AddCompanySchema";
+} from "../../../form/schemas/addCompanySchema";
 import { Typography } from "@mui/material";
 
 export const AddCompanyForm = () => {
