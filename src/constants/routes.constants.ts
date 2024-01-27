@@ -61,4 +61,9 @@ export namespace ROUTES {
     export const ROUTE_NAME = "support-chat";
     export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
   }
+
+  export namespace ADD_COMPANY_CONTACTS_PAGE {
+    export const ROUTE_NAME = "add-company-contacts";
+    export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
+  }
 }

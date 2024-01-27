@@ -12,6 +12,8 @@ import { UpdateContactRequest } from "../../models/contact/update/updateContact.
 import { UpdateContactResponse } from "../../models/contact/update/updateContact.response";
 import { CreateContactRequest } from "../../models/contact/create/createContact.request";
 import { CreateContactResponse } from "../../models/contact/create/createContact.response";
+import { CreateManyContactsResponse } from "../../models/contact/createMany/createManyContacts.response";
+import { CreateManyContactsRequest } from "../../models/contact/createMany/createManyContacts.request";
 
 const contactHttpInstace = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
@@ -83,10 +85,27 @@ const create = async (
   return response;
 };
 
+const createMany = async (
+  requestPayload: CreateManyContactsRequest
+): Promise<ApiResponse<CreateManyContactsResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: "/contacts/create/company",
+    data: requestPayload,
+  };
+
+  const response =
+    await contactHttpInstace.managedRequest<CreateManyContactsResponse>(
+      options
+    );
+  return response;
+};
+
 export const contactApiService = {
   getContacts,
   removeContactById,
   getContactById,
   update,
   create,
+  createMany,
 };

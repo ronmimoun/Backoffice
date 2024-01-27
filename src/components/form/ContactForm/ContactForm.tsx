@@ -163,7 +163,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.CATEGORY.ACCESSORS.VALUE
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.CATEGORY.LABEL}
-                onChange={(category) =>
+                handleChange={(category) =>
                   setSelectedCategory(category as CategoryModel)
                 }
               />
@@ -236,7 +236,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.COMPANY.ACCESSORS.VALUE
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.COMPANY.LABEL}
-                onChange={(company) =>
+                handleChange={(company) =>
                   setSelectedCompany(company as CompanyModel)
                 }
               />
@@ -281,7 +281,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.IN_STOCK.LABEL}
               />
               <BasicSelect
-                onChange={(user: any) => setSelectedAgent(user)}
+                handleChange={(user: any) => setSelectedAgent(user)}
                 required={CONTACT_DETAILS_FORM_CONFIG.INPUTS.AGENT.IS_REQUIRED}
                 list={getAgentUsers()}
                 name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.AGENT.KEY}

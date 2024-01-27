@@ -3,7 +3,7 @@ import { CountryModel } from "../../types/country.type";
 type CategoryManagerState = {
   categories: Array<CategoryModel>;
   companies: Array<CompanyModel>;
-  jobTitles: Array<JobTitle>;
+  jobTitles: Array<JobTitleModel>;
   countries: Array<CountryModel>;
 };
 
@@ -21,7 +21,7 @@ export type CompanyModel = {
   company: string;
 };
 
-export type JobTitle = {
+export type JobTitleModel = {
   _id: string;
   img: null;
   title: string;

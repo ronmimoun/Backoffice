@@ -93,7 +93,7 @@ export const ApproveAgentContactModal = () => {
                       .VALUE
                   }
                   label={APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.CATEGORY.LABEL}
-                  onChange={(category) =>
+                  handleChange={(category) =>
                     setSelectedCategory(category as CategoryModel)
                   }
                 />

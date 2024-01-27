@@ -16,6 +16,10 @@ import {
   createContactThunkBuilder,
   createContactThunk,
 } from "./contact-thunks/createContactThunk";
+import {
+  createManyContactsThunkBuilder,
+  createManyContactsThunk,
+} from "./contact-thunks/createManyContactsThunk";
 
 export const contactThunkActionBuilder = (
   builder: ActionReducerMapBuilder<ContactState>
@@ -24,6 +28,7 @@ export const contactThunkActionBuilder = (
   removeContactByIdThunkBuilder(builder);
   updateContactThunkBuilder(builder);
   createContactThunkBuilder(builder);
+  createManyContactsThunkBuilder(builder);
 };
 
 export const contactThunkActions = {
@@ -31,4 +36,5 @@ export const contactThunkActions = {
   removeContactByIdThunk,
   updateContactThunk,
   createContactThunk,
+  createManyContactsThunk,
 };

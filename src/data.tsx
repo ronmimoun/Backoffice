@@ -9,6 +9,7 @@ import { ThumbUpAlt } from "@mui/icons-material";
 import { SupportAgent } from "@mui/icons-material";
 import { Email } from "@mui/icons-material";
 import { QuestionAnswer } from "@mui/icons-material";
+import { RecentActors } from "@mui/icons-material";
 
 export const menu = [
   {
@@ -80,6 +81,12 @@ export const menu = [
         title: "Agent's Contacts",
         url: ROUTES.AGENT_CONTACT_REQUEST_PAGE.FULL_ROUTE_NAME,
         icon: <SupportAgent />,
+      },
+      {
+        id: 4,
+        title: "Add Company Contacts",
+        url: ROUTES.ADD_COMPANY_CONTACTS_PAGE.FULL_ROUTE_NAME,
+        icon: <RecentActors />,
       },
     ],
   },

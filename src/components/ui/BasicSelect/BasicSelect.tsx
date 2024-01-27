@@ -11,18 +11,18 @@ export type BasicSelectProps<T> = {
   valueAccessor?: string;
   name: string;
   value?: string;
-  onChange?: (selectedValue?: T) => void;
+  handleChange?: (selectedValue?: T) => void;
 } & SelectProps;
 
 const BasicSelect = <T,>({
-  onChange,
+  handleChange,
   value = "",
   ...props
 }: BasicSelectProps<T>) => {
   const { control } = useFormContext();
 
-  const handleChange = (selectedValue?: T) => {
-    onChange && onChange(selectedValue);
+  const onChange = (selectedValue?: T) => {
+    handleChange && handleChange(selectedValue);
   };
 
   return (
@@ -46,7 +46,8 @@ const BasicSelect = <T,>({
               onChange={(e) => {
                 field.onChange(e);
               }}
-              value={value || field.value}
+              value={value || field.value || ""}
+              disabled={props.disabled}
             >
               {props.list.map((item, idx) => {
                 const textAccessor = (item as any)[props.textAccessor];
@@ -57,7 +58,7 @@ const BasicSelect = <T,>({
                   <MenuItem
                     key={idx}
                     value={valueAccessor || textAccessor}
-                    onClick={() => handleChange(item)}
+                    onClick={() => onChange(item)}
                   >
                     {textAccessor}
                   </MenuItem>

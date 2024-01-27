@@ -1,6 +1,7 @@
 import {
   CategoryModel,
   CompanyModel,
+  JobTitleModel,
 } from "../store/categoryManager/categoryManager-state";
 import { store } from "./non-circular-injection.utils";
 
@@ -22,7 +23,14 @@ function getCategoriesByCompany(selectedCompany?: CompanyModel) {
   );
 }
 
+function getJobTitleByString(jobTitle: string): JobTitleModel | undefined {
+  const jobTitles = store.getState().categoryManager.jobTitles;
+
+  return jobTitles.find((currJobTitle) => currJobTitle.title === jobTitle);
+}
+
 export const categoryManagerUtilService = {
   getCompaniesByCategory,
   getCategoriesByCompany,
+  getJobTitleByString,
 };
