@@ -9,21 +9,13 @@ import {
   RequestErrorOptions,
   RequestLoaderOptions,
 } from "../types/request/RequestOptions.type";
-import { isServerErrorType } from "../utils/api-response-builders.utils";
 import { buildApiFailureResponseAlertMessage } from "../utils/alert-message-builder.utils";
-// import store from "../../store";
 import { store } from "../utils/non-circular-injection.utils";
 import {
   decrementLoaderCount,
   incrementLoaderCount,
 } from "../store/global/global.reducer";
-// import { globalActions } from "../../store/global/global.actions";
-// import {
-//   decrementLoaderCount,
-//   incrementLoaderCount,
-// } from "../../store/global/global.reducer";
-
-// import { pushGlobalAlert } from "../../store/global-alerts/global-alerts.reducer";
+import { toast } from "react-toastify";
 
 export function addInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(onRequestFulfilled, onRequestRejected);
@@ -148,32 +140,22 @@ const handleLoader = (
 
 const handleError = (error: AxiosError, errorSource: ApiErrorSourceEnum) => {
   const config = error.config;
-  if (!isValidErrorAlert(config?.errorOptions, error.response?.data)) return;
+  if (!isValidErrorAlert(config?.errorOptions)) return;
 
-  buildApiFailureResponseAlertMessage(
+  const failureAlertMessage = buildApiFailureResponseAlertMessage(
     error,
     errorSource,
     config?.targetAPIHost
   );
-  // store.dispatch(pushGlobalAlert(globalErrorMessage));
+  console.log("failureAlertMessage", failureAlertMessage);
+  toast.error(
+    `${failureAlertMessage.code} - ${failureAlertMessage.title}: ${failureAlertMessage.content}`
+  );
 };
 
-const isValidErrorAlert = (
-  errorOptions?: RequestErrorOptions,
-  errorData?: any
-) => {
+const isValidErrorAlert = (errorOptions?: RequestErrorOptions) => {
   if (!errorOptions) return true;
   if (errorOptions.ErrorAlertMode === "Disabled") return false;
 
-  return !isIgnoredErrorCode(errorOptions, errorData);
-};
-
-const isIgnoredErrorCode = (
-  errorOptions: RequestErrorOptions,
-  errorData?: any
-) => {
-  if (!errorOptions.ignoredErrorCodes || !errorData) return false;
-  if (!isServerErrorType(errorData)) return false;
-
-  return errorOptions.ignoredErrorCodes.has(errorData.errorCode.toString());
+  return true;
 };

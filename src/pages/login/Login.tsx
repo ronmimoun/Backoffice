@@ -16,11 +16,8 @@ import { ROUTES } from "../../constants/routes.constants";
 import { ApiResponse } from "../../models/base/api-base";
 import { LoginResponse } from "../../models/auth/login/login.response";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { globalSelectors } from "../../store/global/global.selectors";
-import { useSelector } from "react-redux";
 
 const Login = () => {
-  const isLoading = useSelector(globalSelectors.isLoading);
   const formMethods = useForm<LoginForm>({
     defaultValues: {
       [LOGIN_FORM_CONFIG.INPUTS.USERNAME.KEY]:
@@ -60,9 +57,7 @@ const Login = () => {
               name={LOGIN_FORM_CONFIG.INPUTS.PASSWORD.KEY}
               type="password"
             />
-            <ButtonPrimary isLoading={isLoading} type="submit">
-              Login
-            </ButtonPrimary>
+            <ButtonPrimary type="submit">Login</ButtonPrimary>
           </form>
         </FormProvider>
       </div>

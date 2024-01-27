@@ -1,33 +1,19 @@
 import { AxiosError } from "axios";
-import { TranslationText } from "../types/translation/translation.type";
-import { ApiErrorSourceEnum } from "../models/base/api-base";
+import { ApiErrorSourceEnum, ServerError } from "../models/base/api-base";
 import {
   RequestErrorOptions,
   TargetAPIHostEnum,
 } from "../types/request/RequestOptions.type";
 import {
-  AlertCodeTypeEnum,
   AlertMessage,
   AlertMessageBuilderArg,
 } from "../types/alert/AlertMessage.type";
 import { isServerErrorType } from "./api-response-builders.utils";
-// import { TranslationText } from "../types/translation/Translation";
-// import { ApiErrorSourceEnum } from "../models/base/api-base";
-// import {
-//   RequestErrorOptions,
-//   TargetAPIHostEnum,
-// } from "../types/request/RequestOptions";
-// import {
-//   AlertCodeTypeEnum,
-//   AlertMessage,
-//   AlertMessageBuilderArg,
-// } from "../types/alert/AlertMessage";
-// import { isServerErrorType } from "./api-response-builders.utils";
 
-const GENERAL_ERROR_TITLE_TEXT: TranslationText = {
-  text: "An Problem Occurred",
-  isTranslationKey: true,
-};
+// const GENERAL_ERROR_TITLE_TEXT: TranslationText = {
+//   text: "An Problem Occurred",
+//   isTranslationKey: true,
+// };
 
 export function buildApiFailureResponseAlertMessage(
   error: AxiosError,
@@ -39,39 +25,33 @@ export function buildApiFailureResponseAlertMessage(
     requestErrorOptions &&
     isCustomErrorAlert(requestErrorOptions, error, errorSource)
   ) {
-    return buildAlertMessageByRequestErrorOptions(
-      requestErrorOptions,
-      errorSource
-    );
+    return buildAlertMessageByRequestErrorOptions(requestErrorOptions);
   }
 
-  const alertCodeType = AlertCodeTypeEnum.Server;
-  const isLockout: boolean | undefined = requestErrorOptions?.isLockout;
-  const alertMessageBuilderFunc = getAlertMessageBuilderFunc(isLockout);
+  return buildAlertMessage({}, error);
+  // const isLockout: boolean | undefined = requestErrorOptions?.isLockout;
+  // const alertMessageBuilderFunc = getAlertMessageBuilderFunc(isLockout);
 
-  switch (errorSource) {
-    case ApiErrorSourceEnum.RequestAPIError:
-      return buildRequestAPIAlertMessage(
-        error,
-        alertCodeType,
-        isLockout,
-        requestErrorOptions?.title || GENERAL_ERROR_TITLE_TEXT
-      );
-    case ApiErrorSourceEnum.RequestNetworkError:
-      return alertMessageBuilderFunc({
-        title: GENERAL_ERROR_TITLE_TEXT,
-        content: {
-          text: "אירעה בעיה בעת ניסון התחברות לשרת",
-          isTranslationKey: true,
-        },
-        alertCodeType: AlertCodeTypeEnum.Network,
-      });
-    default:
-      return alertMessageBuilderFunc({
-        title: GENERAL_ERROR_TITLE_TEXT,
-        alertCodeType,
-      });
-  }
+  // switch (errorSource) {
+  //   case ApiErrorSourceEnum.RequestAPIError:
+  //     return buildRequestAPIAlertMessage(
+  //       error,
+  //       isLockout,
+  //       requestErrorOptions?.title || GENERAL_ERROR_TITLE_TEXT
+  //     );
+  //   case ApiErrorSourceEnum.RequestNetworkError:
+  //     return alertMessageBuilderFunc({
+  //       title: GENERAL_ERROR_TITLE_TEXT,
+  //       content: {
+  //         text: "אירעה בעיה בעת ניסון התחברות לשרת",
+  //         isTranslationKey: true,
+  //       },
+  //     });
+  //   default:
+  //     return alertMessageBuilderFunc({
+  //       title: GENERAL_ERROR_TITLE_TEXT,
+  //     });
+  // }
 }
 
 function isCustomErrorAlert(
@@ -96,40 +76,34 @@ function isCustomErrorAlert(
   return false;
 }
 
-function buildRequestAPIAlertMessage(
-  error: AxiosError,
-  alertCodeType: AlertCodeTypeEnum,
-  isLockout?: boolean,
-  title?: TranslationText
-): AlertMessage {
-  const alertMessageBuilderFunc = getAlertMessageBuilderFunc(isLockout);
-  const targetTitle: TranslationText = title || {
-    text: ApiErrorSourceEnum.RequestAPIError,
-  };
+// function buildRequestAPIAlertMessage(
+//   error: AxiosError,
+//   isLockout?: boolean,
+//   title?: TranslationText
+// ): AlertMessage {
+//   const alertMessageBuilderFunc = getAlertMessageBuilderFunc(isLockout);
+//   const targetTitle: TranslationText = title || {
+//     text: ApiErrorSourceEnum.RequestAPIError,
+//   };
 
-  const errorData = error.response?.data;
-  if (!errorData || !isServerErrorType(errorData)) {
-    return alertMessageBuilderFunc({ title: targetTitle, alertCodeType });
-  }
+//   const errorData = error.response?.data;
+//   if (!errorData || !isServerErrorType(errorData)) {
+//     return alertMessageBuilderFunc({ title: targetTitle });
+//   }
 
-  return alertMessageBuilderFunc({
-    title: targetTitle,
-    content: { text: errorData.errorDescription },
-    code: errorData.errorCode,
-    alertCodeType,
-    alertSource: ApiErrorSourceEnum.RequestAPIError,
-  });
-}
+//   return alertMessageBuilderFunc({
+//     title: targetTitle,
+//     content: { text: errorData.message },
+//     code: 5,
+//   });
+// }
 
 function buildAlertMessageByRequestErrorOptions(
-  requestErrorOptions: RequestErrorOptions,
-  errorSource: ApiErrorSourceEnum
+  requestErrorOptions: RequestErrorOptions
 ): AlertMessage {
   const alertMessageBuilderArg: AlertMessageBuilderArg = {
     title: requestErrorOptions.title,
     content: requestErrorOptions.content,
-    alertSource: errorSource,
-    buttons: requestErrorOptions.alertButton,
   };
 
   const alertMessageBuilderFunc = getAlertMessageBuilderFunc(
@@ -138,55 +112,34 @@ function buildAlertMessageByRequestErrorOptions(
   return alertMessageBuilderFunc(alertMessageBuilderArg);
 }
 
-function buildLockoutAlertMessage(
-  {
+function buildLockoutAlertMessage({
+  title,
+  content,
+  code,
+}: AlertMessageBuilderArg): AlertMessage {
+  return buildAlertMessage({
     title,
     content,
     code,
-    alertCodeType,
-    alertSource,
-    buttons,
-  }: AlertMessageBuilderArg,
-  priority = 1
-): AlertMessage {
-  return buildAlertMessage(
-    {
-      title,
-      content,
-      code,
-      alertCodeType,
-      alertSource,
-      buttons,
-      isLockout: true,
-    },
-    priority
-  );
+  });
 }
 
 function buildAlertMessage(
-  {
-    title,
-    content,
-    code,
-    alertCodeType,
-    alertSource,
-    buttons,
-    isLockout,
-  }: AlertMessageBuilderArg,
-  priority = 2
+  { title, content, code }: AlertMessageBuilderArg,
+  error?: AxiosError
 ): AlertMessage {
+  if (error) {
+    return {
+      title: (error.response?.data as ServerError).status,
+      content: (error.response?.data as ServerError).message,
+      code: error?.response?.status,
+    };
+  }
+
   return {
     title: title,
-    content: content || {
-      text: "Some Problem Occurred",
-      isTranslationKey: true,
-    },
-    priority,
+    content: content || "Some Problem Occurred",
     code,
-    alertCodeType,
-    alertSource: alertSource,
-    buttons,
-    isLockout,
   };
 }
 

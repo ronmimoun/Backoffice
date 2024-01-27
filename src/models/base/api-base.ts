@@ -11,8 +11,8 @@ export type IApiError = {
 };
 
 export interface ServerError {
-  errorCode: string;
-  errorDescription: string;
+  status: string;
+  message: string;
 }
 
 export enum ApiErrorSourceEnum {

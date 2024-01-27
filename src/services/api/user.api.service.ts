@@ -15,9 +15,11 @@ import { RemoveUserResponse } from "../../models/user/remove/removeUser.response
 import { CreateUserResponse } from "../../models/user/create-user/createUser.response";
 import { CreateUserRequest } from "../../models/user/create-user/createUser.request";
 
-const userHttpInstace = createManagedAxiosInstance(
-  buildGeneralApiInstanceConfig(getBaseURl())
-);
+const getUserHttpInstance = () => {
+  return createManagedAxiosInstance(
+    buildGeneralApiInstanceConfig(getBaseURl())
+  );
+};
 
 const getUsers = async (): Promise<ApiResponse<GetUserResponse>> => {
   const options: AxiosRequestConfig = {
@@ -25,7 +27,7 @@ const getUsers = async (): Promise<ApiResponse<GetUserResponse>> => {
     url: "/users",
   };
 
-  const response = await userHttpInstace.managedRequest<GetUserResponse>(
+  const response = await getUserHttpInstance().managedRequest<GetUserResponse>(
     options
   );
   return response;
@@ -40,9 +42,8 @@ const updateUser = async (
     data: request,
   };
 
-  const response = await userHttpInstace.managedRequest<UpdateUserResponse>(
-    options
-  );
+  const response =
+    await getUserHttpInstance().managedRequest<UpdateUserResponse>(options);
   return response;
 };
 
@@ -55,7 +56,7 @@ const getById = async (
     data: request,
   };
 
-  const response = await userHttpInstace.managedRequest<GetByIdResponse>(
+  const response = await getUserHttpInstance().managedRequest<GetByIdResponse>(
     options
   );
   return response;
@@ -70,9 +71,8 @@ const remove = async (
     data: request,
   };
 
-  const response = await userHttpInstace.managedRequest<RemoveUserResponse>(
-    options
-  );
+  const response =
+    await getUserHttpInstance().managedRequest<RemoveUserResponse>(options);
   return response;
 };
 
@@ -85,9 +85,8 @@ const create = async (
     data: request,
   };
 
-  const response = await userHttpInstace.managedRequest<CreateUserResponse>(
-    options
-  );
+  const response =
+    await getUserHttpInstance().managedRequest<CreateUserResponse>(options);
   return response;
 };
 

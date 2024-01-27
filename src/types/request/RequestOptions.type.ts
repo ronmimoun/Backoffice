@@ -1,5 +1,4 @@
 import { AxiosRequestConfig } from "axios";
-import { TranslationText } from "../translation/translation.type";
 import { AlertButtonInfo } from "../alert/AlertMessage.type";
 
 export type RequestOptions = CustomRequestConfig &
@@ -20,8 +19,8 @@ export type RequestRetryOptions = {
 
 export type RequestErrorOptions = {
   ErrorAlertMode: ErrorAlertMode;
-  title?: TranslationText;
-  content?: TranslationText;
+  title?: string;
+  content?: string;
   alertButton?: AlertButtonInfo[];
   isLockout?: boolean;
   ignoredErrorCodes?: Set<string>;

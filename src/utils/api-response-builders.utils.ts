@@ -30,8 +30,8 @@ export function failureApiResponse<T>(
   }
 
   const apiError: IApiError = {
-    code: error.errorCode,
-    message: error.errorDescription,
+    code: error.status,
+    message: error.message,
   };
   const apiResponse: ApiResponse<T> = {
     isSucceeded: false,
@@ -42,5 +42,5 @@ export function failureApiResponse<T>(
 }
 
 export function isServerErrorType(error: any): error is ServerError {
-  return !!(error as ServerError).errorDescription;
+  return !!(error as ServerError).message;
 }

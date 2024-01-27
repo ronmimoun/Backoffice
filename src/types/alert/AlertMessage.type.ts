@@ -2,14 +2,9 @@ import { TranslationText } from "../translation/translation.type";
 import { ApiErrorSourceEnum } from "../../models/base/api-base";
 
 export type AlertMessage = {
-  title?: TranslationText;
-  content?: TranslationText;
-  code?: string;
-  alertCodeType?: AlertCodeTypeEnum;
-  priority: number;
-  alertSource?: AlertSourceEnum;
-  isLockout?: boolean;
-  buttons?: AlertButtonInfo[];
+  title?: string;
+  content?: string;
+  code?: number;
 };
 
 export type AlertButtonInfo = {
