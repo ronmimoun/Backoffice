@@ -117,6 +117,10 @@ const MainRouterProvider = () => {
       path: ROUTES.LOGIN_PAGE.FULL_ROUTE_NAME,
       element: <Login />,
     },
+    {
+      path: ROUTES.ASTERISK,
+      element: <Home />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

@@ -7,6 +7,7 @@ import { ActionColumn } from "../../components/dataTable/ActionColumnBase/Action
 import { STYLES } from "../../constants/style.constants";
 import { objectUtilService } from "../../utils/object.utils";
 import { UserWaitlistEnum } from "../../enums/userWaitlist.enum";
+import { Breadcrumb } from "../../components/shared/Breadcrumb/Breadcrumb";
 
 const PendingUsers = () => {
   const [userWaitlist, setUserWaitlist] = useState<UserWaitlistModel[]>([]);
@@ -63,12 +64,15 @@ const PendingUsers = () => {
   }, [userWaitlist]);
 
   return (
-    <DataTable
-      slug="Pending users"
-      columns={pendingUsersColumn}
-      rows={userWaitlist}
-      actions={actionColumn}
-    />
+    <>
+      <Breadcrumb text="Pending Users" />
+      <DataTable
+        slug="Pending users"
+        columns={pendingUsersColumn}
+        rows={userWaitlist}
+        actions={actionColumn}
+      />
+    </>
   );
 };
 

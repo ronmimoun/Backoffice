@@ -10,7 +10,7 @@ export const Breadcrumb = ({
   ...props
 }: BreadcrumbProps) => {
   return (
-    <Typography {...props} variant={variant}>
+    <Typography className="mb-1" {...props} variant={variant}>
       {text}
     </Typography>
   );

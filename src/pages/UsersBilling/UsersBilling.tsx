@@ -6,6 +6,7 @@ import { useCallback, useMemo } from "react";
 import { ActionColumn } from "../../components/dataTable/ActionColumnBase/ActionColumnBase";
 import { EditIcon } from "../../components/ui/Icons/EditIcon";
 import { UserModel } from "../../types/user.type";
+import { Breadcrumb } from "../../components/shared/Breadcrumb/Breadcrumb";
 
 export const UsersBilling = () => {
   const users = useSelector(userSelectors.getUsers());
@@ -24,11 +25,14 @@ export const UsersBilling = () => {
   }, []);
 
   return (
-    <DataTable
-      slug="billing"
-      columns={billingColumns}
-      rows={users}
-      actions={columnActions}
-    />
+    <>
+      <Breadcrumb text="Billing" />
+      <DataTable
+        slug="billing"
+        columns={billingColumns}
+        rows={users}
+        actions={columnActions}
+      />
+    </>
   );
 };

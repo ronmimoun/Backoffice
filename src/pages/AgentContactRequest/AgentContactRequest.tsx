@@ -8,6 +8,7 @@ import { ActionColumn } from "../../components/dataTable/ActionColumnBase/Action
 import { EditIcon, TrashIcon } from "../../components/ui/Icons";
 import { useAppDispatch } from "../../store";
 import { modalActions } from "../../store/modal/modal.actions";
+import { Breadcrumb } from "../../components/shared/Breadcrumb/Breadcrumb";
 
 const AgentContactRequest = () => {
   const [contactsRequests, setContactsRequests] = useState<
@@ -82,6 +83,7 @@ const AgentContactRequest = () => {
 
   return (
     <Box>
+      <Breadcrumb text="Agent's Contacts" />
       <DataTable
         slug="agentsContactRequest"
         columns={agentContactsRequestsColumn}

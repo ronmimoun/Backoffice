@@ -11,6 +11,7 @@ import { modalActions } from "../../store/modal/modal.actions";
 import { ActionColumn } from "../../components/dataTable/ActionColumnBase/ActionColumnBase";
 import { STYLES } from "../../constants/style.constants";
 import { AgentMessageModel } from "../../types/agent-message.type";
+import { Breadcrumb } from "../../components/shared/Breadcrumb/Breadcrumb";
 
 const AgentMessages = () => {
   const [agentMessages, setAgentMessages] = useState<UserModel[]>([]);
@@ -54,12 +55,15 @@ const AgentMessages = () => {
   }, [agentMessages]);
 
   return (
-    <DataTable
-      slug="topups"
-      columns={agentMessageColumns}
-      rows={agentMessages}
-      actions={actions}
-    />
+    <>
+      <Breadcrumb text="Agent's Messages" />
+      <DataTable
+        slug="topups"
+        columns={agentMessageColumns}
+        rows={agentMessages}
+        actions={actions}
+      />
+    </>
   );
 };
 
