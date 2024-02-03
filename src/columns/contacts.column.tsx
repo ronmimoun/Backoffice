@@ -35,7 +35,7 @@ export const getContactsColumns = ({
     headerName: "Price",
     width: 160,
     renderCell: (params) => {
-      return <div className="contactListItem">{params.row.price}$</div>;
+      return <div>{params.row.price}$</div>;
     },
   },
   {
@@ -44,11 +44,8 @@ export const getContactsColumns = ({
     width: 160,
     renderCell: (params) => {
       return (
-        <div
-          className="contactListItem"
-          onClick={() => handleBuyersFunction(params.row)}
-        >
-          {params.row.transactionHistory.length}
+        <div onClick={() => handleBuyersFunction(params.row)}>
+          {params.row.transactionHistory?.length}
         </div>
       );
     },

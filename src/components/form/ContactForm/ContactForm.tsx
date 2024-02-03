@@ -11,7 +11,6 @@ import { ContactModel } from "../../../types/contact.type";
 import { contactUtilService } from "../../../utils/contact.utils";
 import { useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import BasicSelect from "../../ui/BasicSelect/BasicSelect";
 import { Input } from "../../ui/Input/Input";
 import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
 import { useSelector } from "react-redux";
@@ -24,6 +23,7 @@ import {
   CategoryModel,
   CompanyModel,
 } from "../../../store/categoryManager/categoryManager-state";
+import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
 
 const IS_IN_STOCK = [{ name: "Yes" }, { name: "No" }];
 
@@ -149,7 +149,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
         <Box className={"flex_column"}>
           <Box className={"flex gap_1"}>
             <Box className={classes.form__input_section}>
-              <BasicSelect
+              <BasicSelectController
                 value={selectedCategory?.title}
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.CATEGORY.IS_REQUIRED
@@ -186,7 +186,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.DESCRIPTION.KEY}
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.DESCRIPTION.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.JOB_TITLE.IS_REQUIRED
                 }
@@ -200,7 +200,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.JOB_TITLE.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.IS_REQUIRED
                 }
@@ -222,7 +222,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
             </Box>
 
             <Box>
-              <BasicSelect
+              <BasicSelectController
                 value={selectedCompany?.company}
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.COMPANY.IS_REQUIRED
@@ -252,7 +252,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.LINKED_IN_LINK.KEY}
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.LINKED_IN_LINK.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.COUNTRY.IS_REQUIRED
                 }
@@ -266,7 +266,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.COUNTRY.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={
                   CONTACT_DETAILS_FORM_CONFIG.INPUTS.IN_STOCK.IS_REQUIRED
                 }
@@ -280,7 +280,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.IN_STOCK.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 handleChange={(user: any) => setSelectedAgent(user)}
                 required={CONTACT_DETAILS_FORM_CONFIG.INPUTS.AGENT.IS_REQUIRED}
                 list={getAgentUsers()}

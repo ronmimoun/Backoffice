@@ -12,7 +12,6 @@ import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
 import { useCallback, useState } from "react";
 import { useAppDispatch } from "../../../store";
 import { modalActions } from "../../../store/modal/modal.actions";
-import BasicSelect from "../../ui/BasicSelect/BasicSelect";
 import { UserGenderEnum } from "../../../enums/UserGender.enum";
 import { IsActiveUserEnum } from "../../../enums/ActiveUser.enum";
 import { UserTypesEnum } from "../../../enums/UserTypes.enum";
@@ -20,6 +19,7 @@ import { userActions } from "../../../store/user/user.actions";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponse } from "../../../models/base/api-base";
 import { CreateUserResponse } from "../../../models/user/create-user/createUser.response";
+import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
 
 const GENDER_TYPES = [
   { name: UserGenderEnum.Male, value: "male" },
@@ -135,7 +135,7 @@ const AddUserModal = () => {
                 name={ADD_USER_FORM_CONFIG.INPUTS.ADDRESS.KEY}
                 required={ADD_USER_FORM_CONFIG.INPUTS.ADDRESS.IS_REQUIRED}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={ADD_USER_FORM_CONFIG.INPUTS.PERMISSIONS.IS_REQUIRED}
                 list={USER_TYPES}
                 name={ADD_USER_FORM_CONFIG.INPUTS.PERMISSIONS.KEY}
@@ -144,7 +144,7 @@ const AddUserModal = () => {
                 }
                 label={ADD_USER_FORM_CONFIG.INPUTS.PERMISSIONS.LABEL}
               />
-              <BasicSelect
+              <BasicSelectController
                 required={ADD_USER_FORM_CONFIG.INPUTS.GENDER.IS_REQUIRED}
                 list={GENDER_TYPES}
                 name={ADD_USER_FORM_CONFIG.INPUTS.GENDER.KEY}
@@ -155,7 +155,7 @@ const AddUserModal = () => {
                 label={ADD_USER_FORM_CONFIG.INPUTS.GENDER.LABEL}
               />
 
-              <BasicSelect
+              <BasicSelectController
                 required={ADD_USER_FORM_CONFIG.INPUTS.IS_ACTIVE.IS_REQUIRED}
                 list={IS_ACTIVE_USER}
                 name={ADD_USER_FORM_CONFIG.INPUTS.IS_ACTIVE.KEY}

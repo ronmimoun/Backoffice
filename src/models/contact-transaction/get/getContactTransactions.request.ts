@@ -1,3 +1,1 @@
-export type GetContactTransactionsRequest = {
-  usersId: string[];
-};
+export type GetContactTransactionsRequest = {};

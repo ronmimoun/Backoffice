@@ -1,5 +1,4 @@
 import { FormProvider, useForm } from "react-hook-form";
-import BasicSelect from "../../ui/BasicSelect/BasicSelect";
 import { Input } from "../../ui/Input/Input";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
   AddCompanyFormType,
 } from "../../../form/schemas/addCompanySchema";
 import { Typography } from "@mui/material";
+import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
 
 export const AddCompanyForm = () => {
   const dispatch = useAppDispatch();
@@ -47,7 +47,7 @@ export const AddCompanyForm = () => {
           label={ADD_COMPANY_CONFIG.INPUTS.COMPANY_NAME.LABEL}
           required={ADD_COMPANY_CONFIG.INPUTS.COMPANY_NAME.IS_REQUIRED}
         />
-        <BasicSelect
+        <BasicSelectController
           required={ADD_COMPANY_CONFIG.INPUTS.CATEGORY.IS_REQUIRED}
           list={categories}
           name={ADD_COMPANY_CONFIG.INPUTS.CATEGORY.KEY}

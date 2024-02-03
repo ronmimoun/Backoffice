@@ -1,5 +1,4 @@
 import classes from "./AddCompanyContacts.module.scss";
-import BasicSelect from "../../components/ui/BasicSelect/BasicSelect";
 import { Box } from "@mui/material";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -25,6 +24,7 @@ import { CreateManyContactsRequest } from "../../models/contact/createMany/creat
 import { countryUtilService } from "../../utils/country.utils";
 import { useAppDispatch } from "../../store";
 import { contactActions } from "../../store/contact/contact.actions";
+import BasicSelectController from "../../components/controllers/BasicSelectController/BasicSelectController";
 
 const IS_IN_STOCK = [{ name: "Yes" }, { name: "No" }];
 
@@ -126,7 +126,7 @@ const AddCompanyContacts = () => {
           onSubmit={formMethods.handleSubmit(handleSubmit, onError)}
           onError={(e) => console.log(e)}
         >
-          <BasicSelect
+          <BasicSelectController
             required={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.CATEGORY.IS_REQUIRED}
             list={categories}
             name={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.CATEGORY.KEY}
@@ -139,7 +139,7 @@ const AddCompanyContacts = () => {
             label={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.CATEGORY.LABEL}
             handleChange={(value?: CategoryModel) => setSelectedCategory(value)}
           />
-          <BasicSelect
+          <BasicSelectController
             disabled={!selectedCategory}
             required={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.COMPANY.IS_REQUIRED}
             list={categoryManagerUtilService.getCompaniesByCategory(
@@ -164,7 +164,7 @@ const AddCompanyContacts = () => {
             name={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.JOB_TITLES.KEY}
             required={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.JOB_TITLES.IS_REQUIRED}
           />
-          <BasicSelect
+          <BasicSelectController
             required={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.COUNTRY.IS_REQUIRED}
             list={countries}
             name={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.COUNTRY.KEY}
@@ -176,7 +176,7 @@ const AddCompanyContacts = () => {
             }
             label={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.COUNTRY.LABEL}
           />
-          <BasicSelect
+          <BasicSelectController
             required={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.IN_STOCK.IS_REQUIRED}
             list={IS_IN_STOCK}
             name={ADD_COMPANY_CONTACTS_CONFIG.INPUTS.IN_STOCK.KEY}

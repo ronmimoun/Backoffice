@@ -5,7 +5,7 @@ import { contactSelectors } from "../../store/contact/contact.selectors";
 import { getContactsColumns } from "../../columns/contacts.column";
 import { useAppDispatch } from "../../store";
 import { ContactModel } from "../../types/contact.type";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ActionColumn } from "../../components/dataTable/ActionColumnBase/ActionColumnBase";
 import { EditIcon, TrashIcon } from "../../components/ui/Icons";
 import { useNavigate } from "react-router-dom";
@@ -17,11 +17,17 @@ import { RemoveContactByIdThunkResponse } from "../../store/contact/contact-thun
 import { Box, Typography } from "@mui/material";
 import { ButtonPrimary } from "../../components/ui/Button/ButtonPrimary";
 import { modalActions } from "../../store/modal/modal.actions";
+import { ContactsFilter } from "./ContactsFilter/ContactsFilter";
 
 const Contacts = () => {
   const contacts = useSelector(contactSelectors.getContacts());
   const dispatch = useAppDispatch();
   const nav = useNavigate();
+  const [contactList, setContactList] = useState<ContactModel[]>(contacts);
+
+  useEffect(() => {
+    if (!contactList.length) setContactList(contacts);
+  }, [contacts]);
 
   // const getUserIdArray = useCallback(
   //   (transactionHistory: TransactionHistoryModel[]) => {
@@ -70,6 +76,13 @@ const Contacts = () => {
     dispatch(modalActions.openAddContactModal());
   }, []);
 
+  const handleSetContactList = useCallback(
+    (contacts: ContactModel[]) => {
+      setContactList(contacts);
+    },
+    [setContactList]
+  );
+
   const actions: ActionColumn<ContactModel>[] = useMemo(() => {
     return [
       {
@@ -92,11 +105,18 @@ const Contacts = () => {
           Add New Contact
         </ButtonPrimary>
       </Box>
+
+      <ContactsFilter
+        contacts={contacts}
+        handleSetContactList={handleSetContactList}
+      />
+
       <DataTable
         slug="contacts"
         columns={getContactsColumns({ handleBuyersFunction: handleOpenModal })}
-        rows={contacts}
+        rows={contactList}
         actions={actions}
+        pageSize={50}
       />
     </Box>
   );

@@ -5,16 +5,30 @@ import {
   buildGeneralApiInstanceConfig,
   createManagedAxiosInstance,
 } from "../instances";
-import { GetContactTransactionsRequest } from "../../models/contact-transaction/get/getContactTransactions.request";
+import { GetUserContactTransactionsRequest } from "../../models/contact-transaction/getUser/getUserContactTransactions.request";
+import { GetUserContactTransactionsResponse } from "../../models/contact-transaction/getUser/getUserContactTransactions.response";
 import { GetContactTransactionsResponse } from "../../models/contact-transaction/get/getContactTransactions.response";
 
-const contactTransactionsHttpInstace = createManagedAxiosInstance(
+const contactTransactionsHttpInstance = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
 );
 
+const get = async (): Promise<ApiResponse<GetContactTransactionsResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "get",
+    url: "/contact/transaction",
+  };
+
+  const response =
+    await contactTransactionsHttpInstance.managedRequest<GetContactTransactionsResponse>(
+      options
+    );
+  return response;
+};
+
 const getUsersTransactionsByContactId = async (
-  request: GetContactTransactionsRequest
-): Promise<ApiResponse<GetContactTransactionsResponse>> => {
+  request: GetUserContactTransactionsRequest
+): Promise<ApiResponse<GetUserContactTransactionsResponse>> => {
   const options: AxiosRequestConfig = {
     method: "post",
     url: "/contact/transaction/users",
@@ -22,7 +36,7 @@ const getUsersTransactionsByContactId = async (
   };
 
   const response =
-    await contactTransactionsHttpInstace.managedRequest<GetContactTransactionsResponse>(
+    await contactTransactionsHttpInstance.managedRequest<GetUserContactTransactionsResponse>(
       options
     );
   return response;
@@ -30,4 +44,5 @@ const getUsersTransactionsByContactId = async (
 
 export const contactTransactionApiService = {
   getUsersTransactionsByContactId,
+  get,
 };

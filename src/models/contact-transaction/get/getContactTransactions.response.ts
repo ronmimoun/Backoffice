@@ -1,3 +1,3 @@
-import { UserModel } from "../../../types/user.type";
+import { ContactTransactionModel } from "../../../types/contact-transaction.type";
 
-export type GetContactTransactionsResponse = {} & UserModel[];
+export type GetContactTransactionsResponse = {} & ContactTransactionModel[];

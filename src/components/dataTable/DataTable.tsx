@@ -17,6 +17,7 @@ export type DataTablePropsBase<T> = {
   slug: string;
   actions?: ActionColumn<T>[];
   makeUniqueId?: boolean;
+  pageSize?: number;
 };
 
 export type DataTableProps<T> = {} & DataGridProps & DataTablePropsBase<T>;
@@ -27,6 +28,7 @@ const DataTable = <T extends GridValidRowModel>({
   columns,
   actions,
   className,
+  pageSize = 30,
   ...props
 }: DataTableProps<T>) => {
   const memorizedColumns = useMemo(() => {
@@ -46,7 +48,7 @@ const DataTable = <T extends GridValidRowModel>({
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 30,
+              pageSize,
             },
           },
         }}

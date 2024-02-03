@@ -5,7 +5,6 @@ import { modalSelectors } from "../../../store/modal/modal.selectors";
 import { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import BasicSelect from "../../ui/BasicSelect/BasicSelect";
 import { categoryManagerUtilService } from "../../../utils/category-manager.utils";
 import { CategoryModel } from "../../../store/categoryManager/categoryManager-state";
 import { useAppDispatch } from "../../../store";
@@ -19,6 +18,7 @@ import { categoryManagerSelectors } from "../../../store/categoryManager/categor
 import { Input } from "../../ui/Input/Input";
 import { Box, Typography } from "@mui/material";
 import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
+import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
 
 export const ApproveAgentContactModal = () => {
   const dispatch = useAppDispatch();
@@ -82,7 +82,7 @@ export const ApproveAgentContactModal = () => {
           <form onSubmit={formMethods.handleSubmit(handleSubmit)}>
             <Box className={classes.form__wrapper}>
               <Box className={classes.form_width_100}>
-                <BasicSelect
+                <BasicSelectController
                   required={
                     APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.CATEGORY.IS_REQUIRED
                   }
@@ -97,7 +97,7 @@ export const ApproveAgentContactModal = () => {
                     setSelectedCategory(category as CategoryModel)
                   }
                 />
-                <BasicSelect
+                <BasicSelectController
                   required={
                     APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.COMPANY.IS_REQUIRED
                   }
@@ -136,7 +136,7 @@ export const ApproveAgentContactModal = () => {
                 />
               </Box>
               <Box className={classes.form_width_100}>
-                <BasicSelect
+                <BasicSelectController
                   required={
                     APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.JOB_TITLE.IS_REQUIRED
                   }
@@ -148,7 +148,7 @@ export const ApproveAgentContactModal = () => {
                   }
                   label={APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.JOB_TITLE.LABEL}
                 />
-                <BasicSelect
+                <BasicSelectController
                   required={
                     APPROVAL_AGENT_CONTACT_CONFIG.INPUTS.COUNTRY.IS_REQUIRED
                   }
