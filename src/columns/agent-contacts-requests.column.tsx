@@ -13,12 +13,9 @@ export const agentContactsRequestsColumn: GridColDef<AgentContactRequestModel>[]
       renderCell: (params) => {
         return (
           <Box className={"flex_align_center gap_0_5"}>
-            <img
-              src={params.row.contact.agent?.imgUrl || NO_IMAGE_FALLBACK}
-              alt=""
-            />
+            <img src={params.row.agent?.imgUrl || NO_IMAGE_FALLBACK} alt="" />
             <Typography variant="body1">
-              {params.row.contact.agent?.fullname}
+              {params.row.agent?.fullname}
             </Typography>
           </Box>
         );
@@ -36,7 +33,7 @@ export const agentContactsRequestsColumn: GridColDef<AgentContactRequestModel>[]
       renderCell: (params) => {
         return (
           <Typography variant="body1">
-            {`${params.row.contact.name} ${params.row.contact.familyName}`}
+            {`${params.row.contactInfo.name} ${params.row.contactInfo.familyName}`}
           </Typography>
         );
       },
@@ -48,7 +45,7 @@ export const agentContactsRequestsColumn: GridColDef<AgentContactRequestModel>[]
       renderCell: (params) => {
         return (
           <Typography variant="body1">
-            {`${params.row.contact.company}`}
+            {`${params.row.contactInfo.company}`}
           </Typography>
         );
       },
@@ -60,7 +57,7 @@ export const agentContactsRequestsColumn: GridColDef<AgentContactRequestModel>[]
       renderCell: (params) => {
         return (
           <Typography variant="body1" className="contactListItem">
-            {`${params.row.contact.jobTitle}`}
+            {`${params.row.contactInfo.jobTitle}`}
           </Typography>
         );
       },
@@ -80,7 +77,7 @@ export const agentContactsRequestsColumn: GridColDef<AgentContactRequestModel>[]
     {
       field: "updatedAt",
       headerName: "Updated At",
-      width: 120,
+      width: 200,
       renderCell: (params) => {
         return (
           <Typography variant="body1">

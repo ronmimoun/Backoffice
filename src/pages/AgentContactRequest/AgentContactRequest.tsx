@@ -65,7 +65,9 @@ const AgentContactRequest = () => {
   // );
 
   const openModal = useCallback((contactRequest: AgentContactRequestModel) => {
-    dispatch(modalActions.openApproveAgentContactModal(contactRequest.contact));
+    dispatch(
+      modalActions.openApproveAgentContactModal(contactRequest.contactInfo)
+    );
   }, []);
 
   const actions: ActionColumn<AgentContactRequestModel>[] = useMemo(() => {

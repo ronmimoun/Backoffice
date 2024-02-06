@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
 import { DataTablePropsBase } from "../../components/dataTable/DataTable";
 import { ModalState } from "./modal-state";
-import { ContactModel } from "../../types/contact.type";
+import { ContactApplyRequestInfo } from "../../types/agent-contact-request.type";
 
 const initialState: ModalState = {
   addUserModal: { isOpen: false },
@@ -43,7 +43,7 @@ export const modalSlice = createSlice({
     // ApproveAgentContactModal
     openApproveAgentContactModal: (
       state,
-      action: PayloadAction<ContactModel>
+      action: PayloadAction<ContactApplyRequestInfo>
     ) => {
       state.approveAgentContactModal.isOpen = true;
       if (!action.payload) return;

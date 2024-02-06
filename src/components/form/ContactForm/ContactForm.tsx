@@ -24,6 +24,7 @@ import {
   CompanyModel,
 } from "../../../store/categoryManager/categoryManager-state";
 import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
+import { FileInput } from "../FileInput/FileInput";
 
 const IS_IN_STOCK = [{ name: "Yes" }, { name: "No" }];
 
@@ -200,25 +201,6 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.JOB_TITLE.LABEL}
               />
-              <BasicSelectController
-                required={
-                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.IS_REQUIRED
-                }
-                list={EMAIL_TYPES}
-                name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.KEY}
-                textAccessor={
-                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.ACCESSORS.VALUE
-                }
-                valueAccessor={
-                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.ACCESSORS.VALUE
-                }
-                label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.LABEL}
-              />
-              <Input
-                name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.KEY}
-                required={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.IS_REQUIRED}
-                label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.LABEL}
-              />
             </Box>
 
             <Box>
@@ -248,6 +230,27 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.PRICE.KEY}
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.PRICE.LABEL}
               />
+              <BasicSelectController
+                required={
+                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.IS_REQUIRED
+                }
+                list={EMAIL_TYPES}
+                name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.KEY}
+                textAccessor={
+                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.ACCESSORS.VALUE
+                }
+                valueAccessor={
+                  CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.ACCESSORS.VALUE
+                }
+                label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.LABEL}
+              />
+              <Input
+                name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.KEY}
+                required={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.IS_REQUIRED}
+                label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL.LABEL}
+              />
+            </Box>
+            <Box>
               <Input
                 name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.LINKED_IN_LINK.KEY}
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.LINKED_IN_LINK.LABEL}
@@ -293,6 +296,7 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.AGENT.LABEL}
               />
+              <FileInput />
             </Box>
           </Box>
           <ButtonPrimary

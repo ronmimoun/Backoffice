@@ -1,10 +1,25 @@
-import { ContactModel } from "./contact.type";
+import { AgentModel, ContactModel } from "./contact.type";
 
 export type AgentContactRequestModel = {
-  contact: ContactModel;
-  createdAt: Date;
+  contactInfo: ContactApplyRequestInfo;
   isApproved: boolean;
   status: string;
-  updatedAt: Date;
+  createdAt: Date;
+  updatedAt: Date | null;
+  agent: AgentModel;
   _id: string;
 };
+
+export type ContactApplyRequestInfo = Pick<
+  ContactModel,
+  | "_id"
+  | "category"
+  | "company"
+  | "name"
+  | "familyName"
+  | "jobTitle"
+  | "country"
+  | "desc"
+  | "phone"
+  | "linkedinLink"
+>;
