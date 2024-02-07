@@ -31,6 +31,7 @@ import AgentContactRequest from "../pages/AgentContactRequest/AgentContactReques
 import SupportChat from "../pages/SupportChat/SupportChat";
 import AddCompanyContacts from "../pages/AddCompanyContacts/AddCompanyContacts";
 import ConfigurationManager from "../pages/ConfigurationManager/ConfigurationManager";
+import Contact from "../pages/Contact/Contact";
 
 const MainRouterProvider = () => {
   const Layout = () => {
@@ -95,6 +96,10 @@ const MainRouterProvider = () => {
         {
           path: ROUTES.CONTACTS_PAGE.FULL_ROUTE_NAME,
           element: <Contacts />,
+        },
+        {
+          path: ROUTES.CONTACTS_PAGE.FULL_ROUTE_NAME_VARIABLE,
+          element: <Contact />,
         },
         {
           path: ROUTES.CONTACTS_FEEDBACK_PAGE.FULL_ROUTE_NAME,
