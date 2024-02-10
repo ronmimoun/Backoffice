@@ -78,6 +78,10 @@ export namespace ROUTES {
       export namespace CATEGORIES {
         export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}categories`;
       }
+
+      export namespace JOB_TITLES {
+        export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}job-titles`;
+      }
     }
   }
 }

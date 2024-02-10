@@ -10,4 +10,8 @@ export const REGEX = {
     REGEX: /^[A-Z][a-z0-9_-]{1,10}$/,
     MESSAGE: "First letter most be capital",
   },
+  WITHOUT_NUMBERS: {
+    REGEX: /^([^0-9]*)$/,
+    MESSAGE: "Numbers not allowed",
+  },
 };

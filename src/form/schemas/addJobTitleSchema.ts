@@ -16,10 +16,10 @@ export const ADD_JOB_TITLE_CONFIG = {
 export const ADD_JOB_TITLE_SCHEMA = z.object({
   jobTitleName: z
     .string()
-    .regex(
-      REGEX.FIRST_LETTER_CAPITAL.REGEX,
-      REGEX.FIRST_LETTER_CAPITAL.MESSAGE
-    ),
+    .min(2)
+    .max(4)
+    .regex(REGEX.WITHOUT_NUMBERS.REGEX, REGEX.WITHOUT_NUMBERS.MESSAGE)
+    .trim(),
 });
 
 export type AddJobTitleFormType = z.infer<typeof ADD_JOB_TITLE_SCHEMA>;

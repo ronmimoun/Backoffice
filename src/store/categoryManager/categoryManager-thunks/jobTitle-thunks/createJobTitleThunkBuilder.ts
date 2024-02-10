@@ -3,11 +3,11 @@ import {
   ActionReducerMapBuilder,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { CategoryManagerState } from "../categoryManager-state";
-import { ApiResponse } from "../../../models/base/api-base";
-import { CreateJobTitleRequest } from "../../../models/job-title/create/createJobTitle.request";
-import { CreateJobTitleResponse } from "../../../models/job-title/create/createJobTitle.response";
-import { jobTitleApiService } from "../../../services/api/jobTitle.api.service";
+import { CategoryManagerState } from "../../categoryManager-state";
+import { ApiResponse } from "../../../../models/base/api-base";
+import { jobTitleApiService } from "../../../../services/api/jobTitle.api.service";
+import { CreateJobTitleRequest } from "../../../../models/job-title/create/createJobTitle.request";
+import { CreateJobTitleResponse } from "../../../../models/job-title/create/createJobTitle.response";
 
 export const createJobTitleThunk = createAsyncThunk(
   "categoryManager/createJobTitleThunk",
@@ -27,7 +27,7 @@ export const createJobTitleThunkBuilder = (
     (state, action: PayloadAction<ApiResponse<CreateJobTitleResponse>>) => {
       if (!action.payload.isSucceeded || !action.payload.data?.content) return;
 
-      state.jobTitles.push(action.payload.data.content);
+      state.jobTitles.unshift(action.payload.data.content);
     }
   );
 };
