@@ -82,6 +82,10 @@ export namespace ROUTES {
       export namespace JOB_TITLES {
         export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}job-titles`;
       }
+
+      export namespace COMPANIES {
+        export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}companies`;
+      }
     }
   }
 }

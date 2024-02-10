@@ -5,10 +5,6 @@ import {
   initializeCategoryManagerThunk,
 } from "./categoryManager-thunks/categoryManagerThunkBuilder";
 import {
-  createCompanyThunkBuilder,
-  createCompanyThunk,
-} from "./categoryManager-thunks/createCompanyThunkBuilder";
-import {
   removeCountryThunkBuilder,
   removeCountryThunk,
 } from "./categoryManager-thunks/country-thunks/removeCountryThunkBuilder";
@@ -33,9 +29,17 @@ import {
   updateCategoryThunk,
 } from "./categoryManager-thunks/category-thunks/updateCategoryThunkBuilder";
 import {
-  createJobTitleThunkBuilder,
-  createJobTitleThunk,
-} from "./categoryManager-thunks/jobTitle-thunks/createJobTitleThunkBuilder";
+  createCompanyThunkBuilder,
+  createCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/createCompanyThunkBuilder";
+import {
+  removeCompanyThunkBuilder,
+  removeCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/removeCompanyThunkBuilder";
+import {
+  updateCompanyThunkBuilder,
+  updateCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/updateCompanyThunkBuilder";
 import {
   removeJobTitleThunkBuilder,
   removeJobTitleThunk,
@@ -44,6 +48,10 @@ import {
   updateJobTitleThunkBuilder,
   updateJobTitleThunk,
 } from "./categoryManager-thunks/jobTitle-thunks/updateJobTitleThunkBuilder";
+import {
+  createJobTitleThunkBuilder,
+  createJobTitleThunk,
+} from "./categoryManager-thunks/jobTitle-thunks/createJobTitleThunkBuilder";
 
 export const categoryManagerThunkActionsBuilder = (
   builder: ActionReducerMapBuilder<CategoryManagerState>
@@ -57,6 +65,8 @@ export const categoryManagerThunkActionsBuilder = (
 
   // Companies
   createCompanyThunkBuilder(builder);
+  removeCompanyThunkBuilder(builder);
+  updateCompanyThunkBuilder(builder);
 
   // Countries
   removeCountryThunkBuilder(builder);
@@ -71,7 +81,6 @@ export const categoryManagerThunkActionsBuilder = (
 
 export const categoryManagerThunkActions = {
   initializeCategoryManagerThunk,
-  createCompanyThunk,
   createCategoryThunk,
   createJobTitleThunk,
   removeCountryThunk,
@@ -81,4 +90,7 @@ export const categoryManagerThunkActions = {
   updateCategoryThunk,
   removeJobTitleThunk,
   updateJobTitleThunk,
+  createCompanyThunk,
+  removeCompanyThunk,
+  updateCompanyThunk,
 };

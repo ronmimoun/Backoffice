@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { REGEX } from "../../constants/regex.constants";
 
 export const ADD_COMPANY_CONFIG = {
   FORM_NAME: "Add Company Form",
@@ -22,7 +23,15 @@ export const ADD_COMPANY_CONFIG = {
 };
 
 export const ADD_COMPANY_SCHEMA = z.object({
-  company: z.string(),
+  company: z
+    .string()
+    .min(3)
+    .max(30)
+    .trim()
+    .regex(
+      REGEX.FIRST_LETTER_CAPITAL.REGEX,
+      REGEX.FIRST_LETTER_CAPITAL.MESSAGE
+    ),
   category: z.string(),
 });
 

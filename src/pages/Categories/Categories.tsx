@@ -19,7 +19,7 @@ const Categories = () => {
   const { categories } = useSelector(
     categoryManagerSelectors.categoryManager()
   );
-  const [selectedCategory, setCategoryCountry] = useState<CategoryModel | null>(
+  const [selectedCategory, setSelectedCompany] = useState<CategoryModel | null>(
     null
   );
   const dispatch = useAppDispatch();
@@ -49,7 +49,7 @@ const Categories = () => {
   );
 
   const handleClose = useCallback(() => {
-    setCategoryCountry(null);
+    setSelectedCompany(null);
   }, []);
 
   const actionColumns = useMemo((): ActionColumn<CategoryModel>[] => {
@@ -59,7 +59,7 @@ const Categories = () => {
         icon: <TrashIcon />,
       },
       {
-        actionFunction: (category) => setCategoryCountry(category),
+        actionFunction: (category) => setSelectedCompany(category),
         icon: <EditIcon />,
       },
     ];
