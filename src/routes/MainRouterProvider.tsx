@@ -34,6 +34,7 @@ import ConfigurationManager from "../pages/ConfigurationManager/ConfigurationMan
 import Contact from "../pages/Contact/Contact";
 import { Countries } from "../pages/Countries/Countries";
 import Categories from "../pages/Categories/Categories";
+import Companies from "../pages/Companies/Companies";
 
 const MainRouterProvider = () => {
   const Layout = () => {
@@ -136,6 +137,11 @@ const MainRouterProvider = () => {
               path: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.CATEGORIES
                 .FULL_ROUTE_NAME,
               element: <Categories />,
+            },
+            {
+              path: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.COMPANIES
+                .FULL_ROUTE_NAME,
+              element: <Companies />,
             },
           ],
         },
