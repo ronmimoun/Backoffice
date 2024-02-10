@@ -128,6 +128,13 @@ export const menu = [
           .FULL_ROUTE_NAME,
         icon: <SettingsSuggest />,
       },
+      {
+        id: 4,
+        title: "Job Titles",
+        url: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.JOB_TITLES
+          .FULL_ROUTE_NAME,
+        icon: <SettingsSuggest />,
+      },
     ],
   },
 ];
