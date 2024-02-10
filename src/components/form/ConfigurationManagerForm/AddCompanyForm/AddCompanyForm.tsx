@@ -1,23 +1,23 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../ui/Input/Input";
+import { Input } from "../../../ui/Input/Input";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { categoryManagerSelectors } from "../../../store/categoryManager/categoryManager.selectors";
+import { categoryManagerSelectors } from "../../../../store/categoryManager/categoryManager.selectors";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
-import { useAppDispatch } from "../../../store";
-import { categoryManagerActions } from "../../../store/categoryManager/categoryManager.actions";
+import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
+import { useAppDispatch } from "../../../../store";
+import { categoryManagerActions } from "../../../../store/categoryManager/categoryManager.actions";
 import {
   ADD_COMPANY_CONFIG,
   ADD_COMPANY_SCHEMA,
   AddCompanyFormType,
-} from "../../../form/schemas/addCompanySchema";
+} from "../../../../form/schemas/addCompanySchema";
 import { Typography } from "@mui/material";
-import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
+import BasicSelectController from "../../../controllers/BasicSelectController/BasicSelectController";
 
 export const AddCompanyForm = () => {
   const dispatch = useAppDispatch();
-  const { categories } = useSelector(
+  const { categories: categories } = useSelector(
     categoryManagerSelectors.categoryManager()
   );
   const formMethods = useForm<AddCompanyFormType>({

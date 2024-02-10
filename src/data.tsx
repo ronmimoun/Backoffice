@@ -109,8 +109,16 @@ export const menu = [
     listItems: [
       {
         id: 1,
-        title: "Manager",
-        url: ROUTES.CONFIGURATION_MANAGER_PAGE.FULL_ROUTE_NAME,
+        title: "Countries",
+        url: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.COUNTRIES
+          .FULL_ROUTE_NAME,
+        icon: <SettingsSuggest />,
+      },
+      {
+        id: 2,
+        title: "Categories",
+        url: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.CATEGORIES
+          .FULL_ROUTE_NAME,
         icon: <SettingsSuggest />,
       },
     ],

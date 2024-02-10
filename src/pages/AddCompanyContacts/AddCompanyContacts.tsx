@@ -30,9 +30,12 @@ const IS_IN_STOCK = [{ name: "Yes" }, { name: "No" }];
 
 const AddCompanyContacts = () => {
   const dispatch = useAppDispatch();
-  const { categories, jobTitles, countries, companies } = useSelector(
-    categoryManagerSelectors.categoryManager()
-  );
+  const {
+    categories: categories,
+    jobTitles,
+    categories: countries,
+    companies,
+  } = useSelector(categoryManagerSelectors.categoryManager());
   const formMethods = useForm<AddCompanyContactsForm>({
     defaultValues: {
       [ADD_COMPANY_CONTACTS_CONFIG.INPUTS.CATEGORY.KEY]:

@@ -6,7 +6,7 @@ const initialState: CategoryManagerState = {
   categories: [],
   companies: [],
   jobTitles: [],
-  countries: [],
+  categories: [],
 };
 
 export const categoryManagerSlice = createSlice({
@@ -18,7 +18,7 @@ export const categoryManagerSlice = createSlice({
       state.categories = action.payload.categories;
       state.jobTitles = action.payload.jobTitles;
       state.companies = action.payload.companies;
-      state.countries = action.payload.territories;
+      state.categories = action.payload.territories;
     },
 
     // CATEGORIES
@@ -62,15 +62,15 @@ export const categoryManagerSlice = createSlice({
 
     // TERRITORIES
     setTerritories: (state, action) => {
-      state.countries = action.payload;
+      state.categories = action.payload;
     },
     deleteTerritory: (state, action) => {
-      state.countries = state.countries.filter(
+      state.categories = state.categories.filter(
         (item) => item._id !== action.payload
       );
     },
     saveTerritory: (state, action) => {
-      state.countries.push(action.payload);
+      state.categories.push(action.payload);
     },
   },
   extraReducers: categoryManagerThunkActionsBuilder,

@@ -1,15 +1,15 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../ui/Input/Input";
+import { Input } from "../../../ui/Input/Input";
 import { useCallback } from "react";
-import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
-import { useAppDispatch } from "../../../store";
+import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
+import { useAppDispatch } from "../../../../store";
 import {
   ADD_CATEGORY_CONFIG,
   ADD_CATEGORY_SCHEMA,
   AddCategoryFormType,
-} from "../../../form/schemas/addCategorySchema";
+} from "../../../../form/schemas/addCategorySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categoryManagerActions } from "../../../store/categoryManager/categoryManager.actions";
+import { categoryManagerActions } from "../../../../store/categoryManager/categoryManager.actions";
 import { Typography } from "@mui/material";
 
 export const AddCategoryForm = () => {

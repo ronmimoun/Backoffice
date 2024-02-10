@@ -32,6 +32,8 @@ import SupportChat from "../pages/SupportChat/SupportChat";
 import AddCompanyContacts from "../pages/AddCompanyContacts/AddCompanyContacts";
 import ConfigurationManager from "../pages/ConfigurationManager/ConfigurationManager";
 import Contact from "../pages/Contact/Contact";
+import { Countries } from "../pages/Countries/Countries";
+import Categories from "../pages/Categories/Categories";
 
 const MainRouterProvider = () => {
   const Layout = () => {
@@ -120,6 +122,22 @@ const MainRouterProvider = () => {
         {
           path: ROUTES.CONFIGURATION_MANAGER_PAGE.FULL_ROUTE_NAME,
           element: <ConfigurationManager />,
+        },
+        {
+          path: ROUTES.CONFIGURATION_MANAGER_PAGE.FULL_ROUTE_NAME,
+          element: <ConfigurationManager />,
+          children: [
+            {
+              path: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.COUNTRIES
+                .FULL_ROUTE_NAME,
+              element: <Countries />,
+            },
+            {
+              path: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.CATEGORIES
+                .FULL_ROUTE_NAME,
+              element: <Categories />,
+            },
+          ],
         },
       ],
     },

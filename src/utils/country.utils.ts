@@ -3,7 +3,7 @@ import { CountryModel } from "../types/country.type";
 import { store } from "./non-circular-injection.utils";
 
 export function getCountryTypes(): [string, ...string[]] {
-  const countries = store?.getState()?.categoryManager?.countries;
+  const countries = store?.getState()?.categoryManager?.categories;
   if (!countries) return DEFAULT_COUNTRIES as [string, ...string[]];
 
   const countryEnumTypes = countries.map((country) => country.name);
@@ -11,7 +11,7 @@ export function getCountryTypes(): [string, ...string[]] {
 }
 
 export function getCountyByName(countryName: string): CountryModel {
-  const countries = store?.getState()?.categoryManager?.countries;
+  const countries = store?.getState()?.categoryManager?.categories;
 
   const country = countries.find((country) => country.name === countryName);
   if (!country) return getDefaultCountry();
@@ -19,7 +19,7 @@ export function getCountyByName(countryName: string): CountryModel {
 }
 
 function getDefaultCountry(): CountryModel {
-  const countries = store?.getState()?.categoryManager?.countries;
+  const countries = store?.getState()?.categoryManager?.categories;
   return countries[1];
 }
 

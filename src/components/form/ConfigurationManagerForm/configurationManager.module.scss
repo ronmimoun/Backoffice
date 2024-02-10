@@ -1,0 +1,9 @@
+@import "/src/assets/styles/variables.scss";
+
+.form_box {
+    background-color: $dark-bg;
+    padding: 1rem;
+    border-radius: $default-br;
+    display: flex;
+    gap: 2rem;
+}

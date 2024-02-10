@@ -7,6 +7,10 @@ import {
 } from "../instances";
 import { CreateCategoryResponse } from "../../models/category/create/createCategory.response";
 import { CreateCategoryRequest } from "../../models/category/create/createCategory.request";
+import { RemoveCategoryRequest } from "../../models/category/remove/removeCategory.request";
+import { RemoveCategoryResponse } from "../../models/category/remove/removeCategory.response";
+import { UpdateCategoryRequest } from "../../models/category/update/updateCategory.request";
+import { UpdateCategoryResponse } from "../../models/category/update/updateCategory.response";
 
 const categoryHttpInstance = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
@@ -26,6 +30,36 @@ const create = async (
   return response;
 };
 
+const remove = async (
+  request: RemoveCategoryRequest
+): Promise<ApiResponse<RemoveCategoryResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: `/categories/${request}`,
+    data: request,
+  };
+
+  const response =
+    await categoryHttpInstance.managedRequest<RemoveCategoryResponse>(options);
+  return response;
+};
+
+const update = async (
+  request: UpdateCategoryRequest
+): Promise<ApiResponse<UpdateCategoryResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: `/categories/update/${request}`,
+    data: request,
+  };
+
+  const response =
+    await categoryHttpInstance.managedRequest<UpdateCategoryResponse>(options);
+  return response;
+};
+
 export const categoryApiService = {
   create,
+  remove,
+  update,
 };

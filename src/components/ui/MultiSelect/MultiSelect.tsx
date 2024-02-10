@@ -23,8 +23,8 @@ export type MultiSelectProps<T> = {
   accessor: string;
   required?: boolean;
   value?: string;
-  onChange: (entity: string[]) => void;
-  label: string;
+  onChange?: (entity: string[]) => void;
+  label?: string;
 };
 
 export const MultiSelect = <T,>({
@@ -39,7 +39,7 @@ export const MultiSelect = <T,>({
   const [personName, setPersonName] = useState<string[]>([]);
 
   useEffect(() => {
-    onChange(personName);
+    onChange && onChange(personName);
   }, [personName]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -53,7 +53,7 @@ export const MultiSelect = <T,>({
     <Box className={classes.multi_select_container}>
       <Typography variant="body1">
         {required ? "*" : ""}
-        {label}
+        {label || ""}
       </Typography>
       <Select
         className={classes.select}

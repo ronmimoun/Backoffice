@@ -22,9 +22,11 @@ import BasicSelectController from "../../controllers/BasicSelectController/Basic
 
 export const ApproveAgentContactModal = () => {
   const dispatch = useAppDispatch();
-  const { categories, jobTitles, countries } = useSelector(
-    categoryManagerSelectors.categoryManager()
-  );
+  const {
+    categories: categories,
+    jobTitles,
+    categories: countries,
+  } = useSelector(categoryManagerSelectors.categoryManager());
   const [selectedCategory, setSelectedCategory] = useState<
     CategoryModel | undefined
   >();

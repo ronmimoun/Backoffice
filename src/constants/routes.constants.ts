@@ -70,5 +70,14 @@ export namespace ROUTES {
   export namespace CONFIGURATION_MANAGER_PAGE {
     export const ROUTE_NAME = "configuration-manager";
     export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}`;
+    export namespace CHILDRENS {
+      export namespace COUNTRIES {
+        export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}countries`;
+      }
+
+      export namespace CATEGORIES {
+        export const FULL_ROUTE_NAME = `${BASE}${ROUTE_NAME}${BASE}categories`;
+      }
+    }
   }
 }

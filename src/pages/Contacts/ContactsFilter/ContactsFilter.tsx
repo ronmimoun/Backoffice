@@ -29,7 +29,7 @@ export const ContactsFilter = ({
   contacts,
   handleSetContactList,
 }: ContactsFilterProps) => {
-  const { categories } = useSelector(
+  const { categories: categories } = useSelector(
     categoryManagerSelectors.categoryManager()
   );
   const [filterBy, setFilterBy] = useState<ContactsFilterEnum | undefined>();

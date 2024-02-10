@@ -45,9 +45,11 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
   const contacts = useSelector(contactSelectors.getContacts());
   const users = useSelector(userSelectors.getUsers());
   const countries = useSelector(globalSelectors.countries);
-  const { companies, jobTitles, categories } = useSelector(
-    categoryManagerSelectors.categoryManager()
-  );
+  const {
+    companies,
+    jobTitles,
+    categories: categories,
+  } = useSelector(categoryManagerSelectors.categoryManager());
   const [selectedAgent, setSelectedAgent] = useState<UserModel | undefined>();
   const [selectedCategory, setSelectedCategory] = useState<
     CategoryModel | undefined

@@ -1,15 +1,15 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../ui/Input/Input";
+import { Input } from "../../../ui/Input/Input";
 import { useCallback } from "react";
-import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
-import { useAppDispatch } from "../../../store";
+import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
+import { useAppDispatch } from "../../../../store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { categoryManagerActions } from "../../../store/categoryManager/categoryManager.actions";
+import { categoryManagerActions } from "../../../../store/categoryManager/categoryManager.actions";
 import {
   ADD_JOB_TITLE_CONFIG,
   ADD_JOB_TITLE_SCHEMA,
   AddJobTitleFormType,
-} from "../../../form/schemas/addJobTitleSchema";
+} from "../../../../form/schemas/addJobTitleSchema";
 import { Typography } from "@mui/material";
 
 export const AddJobTitleForm = () => {

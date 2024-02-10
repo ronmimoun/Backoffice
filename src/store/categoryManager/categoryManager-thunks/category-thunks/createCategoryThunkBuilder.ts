@@ -3,11 +3,11 @@ import {
   ActionReducerMapBuilder,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { CategoryManagerState } from "../categoryManager-state";
-import { ApiResponse } from "../../../models/base/api-base";
-import { CreateCategoryRequest } from "../../../models/category/create/createCategory.request";
-import { CreateCategoryResponse } from "../../../models/category/create/createCategory.response";
-import { categoryApiService } from "../../../services/api/category.api.service";
+import { CategoryManagerState } from "../../categoryManager-state";
+import { ApiResponse } from "../../../../models/base/api-base";
+import { categoryApiService } from "../../../../services/api/category.api.service";
+import { CreateCategoryRequest } from "../../../../models/category/create/createCategory.request";
+import { CreateCategoryResponse } from "../../../../models/category/create/createCategory.response";
 
 export const createCategoryThunk = createAsyncThunk(
   "categoryManager/createCategoryThunk",
@@ -27,7 +27,7 @@ export const createCategoryThunkBuilder = (
     (state, action: PayloadAction<ApiResponse<CreateCategoryResponse>>) => {
       if (!action.payload.isSucceeded || !action.payload.data?.content) return;
 
-      state.categories.push(action.payload.data.content);
+      state.categories.unshift(action.payload.data?.content);
     }
   );
 };
