@@ -5,10 +5,6 @@ import {
   initializeCategoryManagerThunk,
 } from "./categoryManager-thunks/categoryManagerThunkBuilder";
 import {
-  createCompanyThunkBuilder,
-  createCompanyThunk,
-} from "./categoryManager-thunks/createCompanyThunkBuilder";
-import {
   createJobTitleThunkBuilder,
   createJobTitleThunk,
 } from "./categoryManager-thunks/createJobTitleThunkBuilder";
@@ -36,6 +32,18 @@ import {
   updateCategoryThunkBuilder,
   updateCategoryThunk,
 } from "./categoryManager-thunks/category-thunks/updateCategoryThunkBuilder";
+import {
+  createCompanyThunkBuilder,
+  createCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/createCompanyThunkBuilder";
+import {
+  removeCompanyThunkBuilder,
+  removeCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/removeCompanyThunkBuilder";
+import {
+  updateCompanyThunkBuilder,
+  updateCompanyThunk,
+} from "./categoryManager-thunks/company-thunks/updateCompanyThunkBuilder";
 
 export const categoryManagerThunkActionsBuilder = (
   builder: ActionReducerMapBuilder<CategoryManagerState>
@@ -47,6 +55,8 @@ export const categoryManagerThunkActionsBuilder = (
 
   // Companies
   createCompanyThunkBuilder(builder);
+  removeCompanyThunkBuilder(builder);
+  updateCompanyThunkBuilder(builder);
 
   // Countries
   removeCountryThunkBuilder(builder);
@@ -69,4 +79,6 @@ export const categoryManagerThunkActions = {
   updateCountryThunk,
   removeCategoryThunk,
   updateCategoryThunk,
+  removeCompanyThunk,
+  updateCompanyThunk,
 };

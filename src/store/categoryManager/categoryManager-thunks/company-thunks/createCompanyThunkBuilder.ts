@@ -3,11 +3,11 @@ import {
   ActionReducerMapBuilder,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { CategoryManagerState } from "../categoryManager-state";
-import { ApiResponse } from "../../../models/base/api-base";
-import { CreateCompanyRequest } from "../../../models/company/create/createCompany.request";
-import { companyApiService } from "../../../services/api/company.api.service";
-import { CreateCompanyResponse } from "../../../models/company/create/createCompany.response";
+import { CategoryManagerState } from "../../categoryManager-state";
+import { ApiResponse } from "../../../../models/base/api-base";
+import { CreateCompanyRequest } from "../../../../models/company/create/createCompany.request";
+import { CreateCompanyResponse } from "../../../../models/company/create/createCompany.response";
+import { companyApiService } from "../../../../services/api/company.api.service";
 
 export const createCompanyThunk = createAsyncThunk(
   "categoryManager/createCompanyThunk",
@@ -27,7 +27,7 @@ export const createCompanyThunkBuilder = (
     (state, action: PayloadAction<ApiResponse<CreateCompanyResponse>>) => {
       if (!action.payload.isSucceeded || !action.payload.data?.content) return;
 
-      state.companies.push(action.payload.data.content);
+      state.companies.unshift(action.payload.data.content);
     }
   );
 };

@@ -121,6 +121,13 @@ export const menu = [
           .FULL_ROUTE_NAME,
         icon: <SettingsSuggest />,
       },
+      {
+        id: 3,
+        title: "Companies",
+        url: ROUTES.CONFIGURATION_MANAGER_PAGE.CHILDRENS.COMPANIES
+          .FULL_ROUTE_NAME,
+        icon: <SettingsSuggest />,
+      },
     ],
   },
 ];
