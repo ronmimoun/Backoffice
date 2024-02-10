@@ -11,13 +11,12 @@ import { EditIcon, TrashIcon } from "../../components/ui/Icons";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../constants/routes.constants";
 import { contactActions } from "../../store/contact/contact.actions";
-import { PayloadAction } from "@reduxjs/toolkit";
 import { ApiResponse } from "../../models/base/api-base";
-import { RemoveContactByIdThunkResponse } from "../../store/contact/contact-thunks/removeContactByIdThunk";
 import { Box, Typography } from "@mui/material";
 import { ButtonPrimary } from "../../components/ui/Button/ButtonPrimary";
 import { modalActions } from "../../store/modal/modal.actions";
 import { ContactsFilter } from "./ContactsFilter/ContactsFilter";
+import { RemoveContactByIdResponse } from "../../models/contact/remove/removeContactById.response";
 
 const Contacts = () => {
   const contacts = useSelector(contactSelectors.getContacts());
@@ -67,9 +66,15 @@ const Contacts = () => {
   const handleRowRemove = useCallback(async (contact: ContactModel) => {
     if (!window.confirm("Are you sure?")) return;
 
-    (await dispatch(
-      contactActions.removeContactByIdThunk(contact._id)
-    )) as PayloadAction<ApiResponse<RemoveContactByIdThunkResponse>>;
+    const response = (
+      await dispatch(contactActions.removeContactByIdThunk(contact._id))
+    ).payload as ApiResponse<RemoveContactByIdResponse>;
+
+    if (!response.isSucceeded || !response.data?.content) return;
+
+    setContactList((prev) =>
+      prev.filter((contact) => contact._id !== response.data?.content)
+    );
   }, []);
 
   const openAddUserModal = useCallback(() => {

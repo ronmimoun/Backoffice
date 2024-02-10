@@ -8,10 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../store";
 import { Breadcrumb } from "../../shared/Breadcrumb/Breadcrumb";
 import {
-  ADD_CATEGORY_CONFIG,
-  AddCategoryFormType,
-} from "../../../form/schemas/addCategorySchema";
-import {
   CategoryModel,
   CompanyModel,
 } from "../../../store/categoryManager/categoryManager-state";

@@ -7,7 +7,6 @@ import { Input } from "../../ui/Input/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../store";
 import { Breadcrumb } from "../../shared/Breadcrumb/Breadcrumb";
-import { ADD_CATEGORY_CONFIG } from "../../../form/schemas/addCategorySchema";
 import { JobTitleModel } from "../../../store/categoryManager/categoryManager-state";
 import { RenderByBoolean } from "../../utils/RenderByBoolean/RenderByBoolean";
 import {

@@ -1,9 +1,11 @@
 import { ContactModel } from "../../types/contact.type";
 
-export type EditOrNewContactTypeBase = Omit<ContactModel, NonEditable>;
+export type EditOrNewContactTypeBase = {
+  _id?: string;
+} & Omit<ContactModel, NonEditable>;
 
 type NonEditable =
-  | "img"
+  | "_id"
   | "mobile"
   | "transactionHistory"
   | "createdAt"

@@ -24,7 +24,7 @@ export const removeCountryThunkBuilder = (
     (state, action: PayloadAction<ApiResponse<RemoveCountryResponse>>) => {
       if (!action.payload.isSucceeded || !action.payload.data?.content) return;
 
-      state.categories = state.categories.filter(
+      state.countries = state.countries.filter(
         (country) => country._id !== action.payload.data?.content
       );
     }

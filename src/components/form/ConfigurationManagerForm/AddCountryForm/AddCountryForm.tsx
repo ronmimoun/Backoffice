@@ -3,7 +3,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Input } from "../../../ui/Input/Input";
 import { useCallback } from "react";
 import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
-import { useAppDispatch } from "../../../../store";
 import { ADD_JOB_TITLE_CONFIG } from "../../../../form/schemas/addJobTitleSchema";
 import { Box, Typography } from "@mui/material";
 import { MultiSelect } from "../../../ui/MultiSelect/MultiSelect";
@@ -11,7 +10,6 @@ import { useSelector } from "react-redux";
 import { categoryManagerSelectors } from "../../../../store/categoryManager/categoryManager.selectors";
 
 export const AddCountryForm = () => {
-  const dispatch = useAppDispatch();
   const { categories: countries } = useSelector(
     categoryManagerSelectors.categoryManager()
   );

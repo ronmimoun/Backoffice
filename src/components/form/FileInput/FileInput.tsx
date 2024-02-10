@@ -5,8 +5,13 @@ import { CircularImage } from "../../shared/CircularImage/CircularImage";
 import { NO_IMAGE_FALLBACK } from "../../../constants/image.constants";
 import { Publish } from "@mui/icons-material";
 
-export const FileInput = () => {
-  const [selectedImg, setSelectedImg] = useState<string>();
+type FileInputPropsBase = {
+  onChange?: (file: File) => void;
+  defaultValue?: string;
+};
+
+export const FileInput = ({ onChange, defaultValue }: FileInputPropsBase) => {
+  const [selectedImg, setSelectedImg] = useState<string>(defaultValue || "");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleImagePicking = useCallback(() => {
@@ -17,6 +22,7 @@ export const FileInput = () => {
     (ev: React.ChangeEvent<HTMLInputElement>) => {
       if (!ev.target.files) return;
       const selectedFile = ev.target.files[0];
+      onChange && onChange(selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         const imgUrl = reader.result;
@@ -24,7 +30,7 @@ export const FileInput = () => {
       };
       reader.readAsDataURL(selectedFile);
     },
-    []
+    [onChange]
   );
 
   return (

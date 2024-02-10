@@ -36,11 +36,9 @@ export const updateJobTitleThunkBuilder = (
       if (jobTitleToUpdateIndex < 0) return;
       let jobTitles = [...state.jobTitles];
 
-      jobTitles = state.jobTitles.splice(
-        jobTitleToUpdateIndex,
-        1,
-        updatedJobTitle
-      );
+      jobTitles.splice(jobTitleToUpdateIndex, 1, updatedJobTitle);
+
+      state.jobTitles = jobTitles;
     }
   );
 };

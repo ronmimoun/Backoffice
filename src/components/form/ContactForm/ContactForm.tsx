@@ -24,7 +24,7 @@ import {
   CompanyModel,
 } from "../../../store/categoryManager/categoryManager-state";
 import BasicSelectController from "../../controllers/BasicSelectController/BasicSelectController";
-import { FileInput } from "../FileInput/FileInput";
+import { FileInputController } from "../../controllers/FileInputController/FileInputController";
 
 const IS_IN_STOCK = [{ name: "Yes" }, { name: "No" }];
 
@@ -98,6 +98,8 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
         CONTACT_DETAILS_FORM_CONFIG.INPUTS.CATEGORY.DEFAULT_VALUE,
       [CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.KEY]:
         CONTACT_DETAILS_FORM_CONFIG.INPUTS.EMAIL_TYPE.DEFAULT_VALUE,
+      [CONTACT_DETAILS_FORM_CONFIG.INPUTS.IMAGE.KEY]:
+        CONTACT_DETAILS_FORM_CONFIG.INPUTS.IMAGE.DEFAULT_VALUE,
     },
     resolver: zodResolver(CONTACT_DETAILS_SCHEMA),
   });
@@ -298,7 +300,10 @@ export const ContactForm = ({ contact, handleSubmit }: ContactFormProps) => {
                 }
                 label={CONTACT_DETAILS_FORM_CONFIG.INPUTS.AGENT.LABEL}
               />
-              <FileInput />
+              <FileInputController
+                defaultValue={contact?.img?.url}
+                name={CONTACT_DETAILS_FORM_CONFIG.INPUTS.IMAGE.KEY}
+              />
             </Box>
           </Box>
           <ButtonPrimary

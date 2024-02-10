@@ -31,13 +31,17 @@ export const updateContactThunkBuilder = (
           !action.payload.data?.content
         )
           return;
+        const updatedContact = action.payload.data?.content;
 
-        state.contacts = state.contacts.map((contact) => {
-          if (contact._id === action.payload.data?.content._id) {
-            contact = action.payload.data!.content;
-          }
-          return contact;
-        });
+        const contactToUpdateIndex = state.contacts.findIndex(
+          (contact) => contact._id === updatedContact._id
+        );
+
+        if (contactToUpdateIndex < 0) return;
+        let contacts = [...state.contacts];
+
+        contacts.splice(contactToUpdateIndex, 1, updatedContact);
+        state.contacts = contacts;
       }
     )
     .addCase(updateContactThunk.rejected, () => {});

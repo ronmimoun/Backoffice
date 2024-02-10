@@ -32,6 +32,10 @@ const ParsedObjectDetails = <T extends object>({
     setObjectDetails(details);
   }, [details]);
 
+  useEffect(() => {
+    setImage(imgUrl || NO_IMAGE_FALLBACK);
+  }, [imgUrl]);
+
   const handleImageUpload = useCallback(async (image: UploadResponse) => {
     const response = (await dispatch(
       userActions.updateUserThunk({ _id: entityId, imgUrl: image })

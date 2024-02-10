@@ -36,11 +36,8 @@ export const updateCompanyThunkBuilder = (
       if (companyToUpdateIndex < 0) return;
       let companies = [...state.companies];
 
-      companies = state.companies.splice(
-        companyToUpdateIndex,
-        1,
-        updatedCompany
-      );
+      companies.splice(companyToUpdateIndex, 1, updatedCompany);
+      state.companies = companies;
     }
   );
 };

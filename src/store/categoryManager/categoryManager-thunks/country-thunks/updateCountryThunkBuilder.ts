@@ -35,11 +35,8 @@ export const updateCountryThunkBuilder = (
       if (countryToUpdateIndex < 0) return;
       let countries = [...state.countries];
 
-      countries = state.countries.splice(
-        countryToUpdateIndex,
-        1,
-        updatedCountry
-      );
+      countries.splice(countryToUpdateIndex, 1, updatedCountry);
+      state.countries = countries;
     }
   );
 };

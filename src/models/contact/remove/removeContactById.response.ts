@@ -1,1 +1,1 @@
-export type RemoveContactByIdResponse = {};
+export type RemoveContactByIdResponse = string;

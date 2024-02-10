@@ -36,11 +36,8 @@ export const updateCategoryThunkBuilder = (
       if (categoryToUpdateIndex < 0) return;
       let categories = [...state.categories];
 
-      categories = state.categories.splice(
-        categoryToUpdateIndex,
-        1,
-        updatedCategory
-      );
+      categories.splice(categoryToUpdateIndex, 1, updatedCategory);
+      state.categories = categories;
     }
   );
 };

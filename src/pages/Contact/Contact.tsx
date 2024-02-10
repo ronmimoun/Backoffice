@@ -16,6 +16,12 @@ import { contactActions } from "../../store/contact/contact.actions";
 import { UpdateContactRequest } from "../../models/contact/update/updateContact.request";
 import { UserModel } from "../../types/user.type";
 import { ContactDetailsForm } from "../../form/schemas/contactDetailsSchema";
+import { fileApiService } from "../../services/api/file.api.service";
+import { ImageModel } from "../../types/image.type";
+import { ApiResponse } from "../../models/base/api-base";
+import { MESSAGES } from "../../constants/messages.constants";
+import { toast } from "react-toastify";
+import { UpdateContactResponse } from "../../models/contact/update/updateContact.response";
 
 const Contact = () => {
   const { _id } = useParams();
@@ -70,10 +76,30 @@ const Contact = () => {
   const handleSubmit = useCallback(
     async (formData: ContactDetailsForm, selectedAgent?: UserModel) => {
       if (!contact?._id) return;
+
+      const response = (await fileApiService.controlledUpload(
+        formData.img
+      )) as ApiResponse<ImageModel>;
+
+      if (!response.isSucceeded || !response.data?.content) {
+        toast.error(MESSAGES.HTTP_ERROR.UPLOAD_IMAGE.MESSAGE);
+      } else {
+        formData = { ...formData, img: response.data?.content };
+      }
+
       const parsedContact = parseContactToMatchType(formData, selectedAgent);
       if (!parsedContact) return;
 
-      dispatch(contactActions.updateContactThunk(parsedContact));
+      const updatedContactResponse = (
+        await dispatch(contactActions.updateContactThunk(parsedContact))
+      ).payload as ApiResponse<UpdateContactResponse>;
+      if (
+        !updatedContactResponse.isSucceeded ||
+        !updatedContactResponse.data?.content
+      )
+        return;
+
+      setContact(updatedContactResponse.data.content);
     },
     [contact]
   );
@@ -86,6 +112,7 @@ const Contact = () => {
     return {
       ...formData,
       _id: contact._id,
+      img: formData.img || contact.img,
       agent: contactUtilService.assembleAgent(selectedAgent) || contact.agent,
       inStock: formData.inStock === "Yes" ? true : false,
       price: +formData.price,
@@ -105,7 +132,7 @@ const Contact = () => {
         className={"flex_1"}
         entityId={contact._id}
         details={parsedUserDetails}
-        imgUrl={contact.img.url || NO_IMAGE_FALLBACK}
+        imgUrl={contact?.img?.url || NO_IMAGE_FALLBACK}
         title={`${contact.name} ${contact.familyName}`}
       />
       <hr className={classes.container__horizontal} />

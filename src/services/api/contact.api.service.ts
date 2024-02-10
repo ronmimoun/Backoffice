@@ -14,8 +14,10 @@ import { CreateContactRequest } from "../../models/contact/create/createContact.
 import { CreateContactResponse } from "../../models/contact/create/createContact.response";
 import { CreateManyContactsResponse } from "../../models/contact/createMany/createManyContacts.response";
 import { CreateManyContactsRequest } from "../../models/contact/createMany/createManyContacts.request";
+import { RemoveContactByIdRequest } from "../../models/contact/remove/removeContactById.request";
+import { RemoveContactByIdResponse } from "../../models/contact/remove/removeContactById.response";
 
-const contactHttpInstace = createManagedAxiosInstance(
+const contactHttpInstance = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
 );
 
@@ -25,22 +27,24 @@ const getContacts = async (): Promise<ApiResponse<GetContactsResponse>> => {
     url: "/contacts",
   };
 
-  const response = await contactHttpInstace.managedRequest<GetContactsResponse>(
-    options
-  );
+  const response =
+    await contactHttpInstance.managedRequest<GetContactsResponse>(options);
   return response;
 };
 
 const removeContactById = async (
-  request: string
-): Promise<ApiResponse<void>> => {
+  request: RemoveContactByIdRequest
+): Promise<ApiResponse<RemoveContactByIdResponse>> => {
   const options: AxiosRequestConfig = {
     method: "post",
     url: `/contacts/${request}`,
     data: request,
   };
 
-  const response = await contactHttpInstace.managedRequest<void>(options);
+  const response =
+    await contactHttpInstance.managedRequest<RemoveContactByIdResponse>(
+      options
+    );
   return response;
 };
 
@@ -53,7 +57,7 @@ const getContactById = async (
   };
 
   const response =
-    await contactHttpInstace.managedRequest<GetcontactByIdResponse>(options);
+    await contactHttpInstance.managedRequest<GetcontactByIdResponse>(options);
   return response;
 };
 
@@ -67,7 +71,7 @@ const update = async (
   };
 
   const response =
-    await contactHttpInstace.managedRequest<UpdateContactResponse>(options);
+    await contactHttpInstance.managedRequest<UpdateContactResponse>(options);
   return response;
 };
 
@@ -81,7 +85,7 @@ const create = async (
   };
 
   const response =
-    await contactHttpInstace.managedRequest<CreateContactResponse>(options);
+    await contactHttpInstance.managedRequest<CreateContactResponse>(options);
   return response;
 };
 
@@ -95,7 +99,7 @@ const createMany = async (
   };
 
   const response =
-    await contactHttpInstace.managedRequest<CreateManyContactsResponse>(
+    await contactHttpInstance.managedRequest<CreateManyContactsResponse>(
       options
     );
   return response;

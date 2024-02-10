@@ -15,7 +15,7 @@ export type ContactModel = {
   phone: string | null;
   linkedinLink: string;
   agent: AgentModel | null;
-  img: Image;
+  img: ImageModel;
   createdAt: Date;
   transactionHistory: Array<TransactionHistoryModel>;
   averageRating: number;
@@ -34,7 +34,7 @@ export type AgentModel = {
   imgUrl: string | null;
 };
 
-type Image = {
+export type ImageModel = {
   url: string;
   _id: string;
 };

@@ -30,6 +30,7 @@ export const CONTACT_DETAILS_SCHEMA = z.object({
   emailType: z.enum(EmailTypes, {
     required_error: MESSAGES.VALIDATION_ERROR.EMAIL_TYPE,
   }),
+  img: z.any(),
 });
 
 export type ContactDetailsForm = z.infer<typeof CONTACT_DETAILS_SCHEMA>;
@@ -155,6 +156,13 @@ export const CONTACT_DETAILS_FORM_CONFIG = {
       ACCESSORS: {
         VALUE: "type",
       },
+    },
+    IMAGE: {
+      KEY: "img",
+      PLACEHOLDER: "",
+      DEFAULT_VALUE: "",
+      LABEL: "Contact Image",
+      IS_REQUIRED: false,
     },
   },
 };

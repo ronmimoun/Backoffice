@@ -6,7 +6,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Input } from "../../ui/Input/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../store";
-import { categoryManagerActions } from "../../../store/categoryManager/categoryManager.actions";
 import { ApiResponse } from "../../../models/base/api-base";
 import { Breadcrumb } from "../../shared/Breadcrumb/Breadcrumb";
 import {

@@ -30,6 +30,15 @@ const upload = async (
   return response;
 };
 
+const controlledUpload = async (file: File) => {
+  const formData = new FormData();
+  formData.append("upload", file);
+
+  const response = await fileApiService.upload(formData);
+  return response;
+};
+
 export const fileApiService = {
   upload,
+  controlledUpload,
 };
