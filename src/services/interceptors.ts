@@ -5,7 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import { ApiErrorSourceEnum } from "../models/base/api-base";
-import { handleError, handleLoader } from "./handlers";
+import { addJwtHeader, handleError, handleLoader } from "./handlers";
 
 export function addInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(onRequestFulfilled, onRequestRejected);
@@ -21,6 +21,7 @@ export function addInterceptors(instance: AxiosInstance) {
 
 function onRequestFulfilled(config: InternalAxiosRequestConfig<any>) {
   handleLoader(config.loaderOptions);
+  addJwtHeader(config);
 
   if (config.headers.Authorization) return config;
 

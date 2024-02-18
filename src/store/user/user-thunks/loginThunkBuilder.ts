@@ -22,8 +22,10 @@ export const loginThunk = createAsyncThunk(
 
     if (!userResponse.isSucceeded || !userResponse.data) return userResponse;
 
-    const user = userResponse.data.content;
-    userUtilService.saveLocalUser(user);
+    const payload = userResponse.data.content;
+    userUtilService.saveLocalUser(payload.user);
+    userUtilService.saveUserJwtToken(payload.jwtToken);
+
     return userResponse;
   }
 );
@@ -38,10 +40,11 @@ export const loginThunkBuilder = (
       (state, action: PayloadAction<ApiResponse<LoginResponse>>) => {
         if (
           !action.payload.data ||
-          !userUtilService.isAdmin(action.payload.data.content)
+          !userUtilService.isAdmin(action.payload.data.content.user)
         )
           return;
-        state.currentUser = action.payload.data.content;
+        state.currentUser = action.payload.data.content.user;
+        state.jwtToken = action.payload.data.content.jwtToken;
       }
     )
     .addCase(loginThunk.rejected, () => {});

@@ -1,5 +1,8 @@
 import { CREDIT_VALUE } from "../constants/credit.constants";
-import { STORAGE_KEY_LOGGEDIN_USER } from "../constants/storage.constatns";
+import {
+  STORAGE_KEY_JWT_TOKEN,
+  STORAGE_KEY_LOGGEDIN_USER,
+} from "../constants/storage.constatns";
 import { TransactionHistoryModel } from "../types/contact.type";
 import { UserModel } from "../types/user.type";
 import { store } from "./non-circular-injection.utils";
@@ -35,6 +38,17 @@ function saveLocalUser(user: UserModel) {
   return user;
 }
 
+function getUserJwtToken() {
+  const token = sessionStorage.getItem(STORAGE_KEY_JWT_TOKEN);
+  if (!token) return null;
+  return token;
+}
+
+function saveUserJwtToken(token: string) {
+  sessionStorage.setItem(STORAGE_KEY_JWT_TOKEN, token);
+  return token;
+}
+
 function getLoggedinUser(): UserModel | null {
   const user = sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER);
   if (!user) return null;
@@ -57,4 +71,6 @@ export const userUtilService = {
   sumExpenses,
   getUserContactTransactionById,
   getAgentUsers,
+  saveUserJwtToken,
+  getUserJwtToken,
 };

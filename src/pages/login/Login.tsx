@@ -38,7 +38,7 @@ const Login = () => {
     if (
       !response.payload.isSucceeded ||
       !response.payload.data ||
-      !response.payload.data.content.isAdmin
+      !response.payload.data.content.user.isAdmin
     )
       return;
 

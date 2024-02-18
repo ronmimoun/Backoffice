@@ -1,3 +1,6 @@
 import { UserModel } from "../../../types/user.type";
 
-export type LoginResponse = {} & UserModel;
+export type LoginResponse = {
+  user: UserModel;
+  jwtToken: string;
+};

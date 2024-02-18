@@ -6,6 +6,7 @@ import { userUtilService } from "../../utils/user.utils";
 
 const initialState: UserState = {
   currentUser: userUtilService.getLoggedinUser() || null,
+  jwtToken: userUtilService.getUserJwtToken() || null,
   users: [],
 };
 
