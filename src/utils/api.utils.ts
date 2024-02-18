@@ -1,6 +1,6 @@
 export function getBaseURl() {
   return import.meta.env.MODE === "production"
-    ? import.meta.env.VITE_APP_PRODUCTION
+    ? import.meta.env.VITE_APP_BACKOFFICE_PROD
     : import.meta.env.VITE_APP_LOCAL;
 }
 
