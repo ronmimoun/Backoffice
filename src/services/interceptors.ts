@@ -5,17 +5,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 import { ApiErrorSourceEnum } from "../models/base/api-base";
-import {
-  RequestErrorOptions,
-  RequestLoaderOptions,
-} from "../types/request/RequestOptions.type";
-import { buildApiFailureResponseAlertMessage } from "../utils/alert-message-builder.utils";
-import { store } from "../utils/non-circular-injection.utils";
-import {
-  decrementLoaderCount,
-  incrementLoaderCount,
-} from "../store/global/global.reducer";
-import { toast } from "react-toastify";
+import { handleError, handleLoader } from "./handlers";
 
 export function addInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use(onRequestFulfilled, onRequestRejected);
@@ -123,39 +113,4 @@ const retryRequest = (
     handleLoader(config.loaderOptions, false);
     instance(config);
   });
-};
-
-const handleLoader = (
-  loaderOptions?: RequestLoaderOptions,
-  isIncrement: boolean = true
-) => {
-  if (loaderOptions?.ignore) return;
-
-  if (isIncrement) {
-    store.dispatch(incrementLoaderCount());
-  } else {
-    store.dispatch(decrementLoaderCount());
-  }
-};
-
-const handleError = (error: AxiosError, errorSource: ApiErrorSourceEnum) => {
-  const config = error.config;
-  if (!isValidErrorAlert(config?.errorOptions)) return;
-
-  const failureAlertMessage = buildApiFailureResponseAlertMessage(
-    error,
-    errorSource,
-    config?.targetAPIHost
-  );
-  console.log("failureAlertMessage", failureAlertMessage);
-  toast.error(
-    `${failureAlertMessage.code} - ${failureAlertMessage.title}: ${failureAlertMessage.content}`
-  );
-};
-
-const isValidErrorAlert = (errorOptions?: RequestErrorOptions) => {
-  if (!errorOptions) return true;
-  if (errorOptions.ErrorAlertMode === "Disabled") return false;
-
-  return true;
 };

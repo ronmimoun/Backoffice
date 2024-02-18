@@ -7,9 +7,11 @@ import {
 } from "../instances";
 import { AxiosRequestConfig } from "axios";
 
-const categoryManagerHttpInstance = createManagedAxiosInstance(
-  buildGeneralApiInstanceConfig(getBaseURl())
-);
+function getCategoryManagerHttpInstance() {
+  return createManagedAxiosInstance(
+    buildGeneralApiInstanceConfig(getBaseURl())
+  );
+}
 
 const getCategoryManager = async (): Promise<
   ApiResponse<getCategoryManagerResponse>
@@ -20,7 +22,7 @@ const getCategoryManager = async (): Promise<
   };
 
   const response =
-    await categoryManagerHttpInstance.managedRequest<getCategoryManagerResponse>(
+    await getCategoryManagerHttpInstance().managedRequest<getCategoryManagerResponse>(
       options
     );
   return response;

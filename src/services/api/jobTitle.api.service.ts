@@ -12,9 +12,8 @@ import { RemoveJobTitleResponse } from "../../models/job-title/remove/removeJobT
 import { UpdateJobTitleRequest } from "../../models/job-title/update/updateJobTitle.request";
 import { UpdateJobTitleResponse } from "../../models/job-title/update/updateJobTitle.response";
 
-const jobTitleHttpInstance = createManagedAxiosInstance(
-  buildGeneralApiInstanceConfig(getBaseURl())
-);
+const getJobTitleHttpInstance = () =>
+  createManagedAxiosInstance(buildGeneralApiInstanceConfig(getBaseURl()));
 
 const create = async (
   request: CreateJobTitleRequest
@@ -26,7 +25,9 @@ const create = async (
   };
 
   const response =
-    await jobTitleHttpInstance.managedRequest<CreateJobTitleResponse>(options);
+    await getJobTitleHttpInstance().managedRequest<CreateJobTitleResponse>(
+      options
+    );
   return response;
 };
 
@@ -39,7 +40,9 @@ const remove = async (
   };
 
   const response =
-    await jobTitleHttpInstance.managedRequest<RemoveJobTitleResponse>(options);
+    await getJobTitleHttpInstance().managedRequest<RemoveJobTitleResponse>(
+      options
+    );
   return response;
 };
 
@@ -53,7 +56,9 @@ const update = async (
   };
 
   const response =
-    await jobTitleHttpInstance.managedRequest<UpdateJobTitleResponse>(options);
+    await getJobTitleHttpInstance().managedRequest<UpdateJobTitleResponse>(
+      options
+    );
   return response;
 };
 

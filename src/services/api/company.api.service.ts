@@ -12,9 +12,8 @@ import { RemoveCompanyResponse } from "../../models/company/remove/removeCompany
 import { UpdateCompanyRequest } from "../../models/company/update/updateCompany.request";
 import { UpdateCompanyResponse } from "../../models/company/update/updateCompany.response";
 
-const companyHttpInstance = createManagedAxiosInstance(
-  buildGeneralApiInstanceConfig(getBaseURl())
-);
+const getCompanyHttpInstance = () =>
+  createManagedAxiosInstance(buildGeneralApiInstanceConfig(getBaseURl()));
 
 const create = async (
   request: CreateCompanyRequest
@@ -26,7 +25,9 @@ const create = async (
   };
 
   const response =
-    await companyHttpInstance.managedRequest<CreateCompanyResponse>(options);
+    await getCompanyHttpInstance().managedRequest<CreateCompanyResponse>(
+      options
+    );
   return response;
 };
 
@@ -40,7 +41,9 @@ const remove = async (
   };
 
   const response =
-    await companyHttpInstance.managedRequest<RemoveCompanyResponse>(options);
+    await getCompanyHttpInstance().managedRequest<RemoveCompanyResponse>(
+      options
+    );
   return response;
 };
 
@@ -54,7 +57,9 @@ const update = async (
   };
 
   const response =
-    await companyHttpInstance.managedRequest<UpdateCompanyResponse>(options);
+    await getCompanyHttpInstance().managedRequest<UpdateCompanyResponse>(
+      options
+    );
   return response;
 };
 

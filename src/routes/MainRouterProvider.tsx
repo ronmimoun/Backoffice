@@ -20,12 +20,7 @@ import { UsersBilling } from "../pages/UsersBilling/UsersBilling";
 import CreditTransactions from "../pages/CreditTransactions/CreditTransactions";
 import AgentMessages from "../pages/AgentMessages/AgentMessages";
 import PendingUsers from "../pages/PendingUsers/PendingUsers";
-import { useAppDispatch } from "../store";
-import { userActions } from "../store/user/user.actions";
-import { contactActions } from "../store/contact/contact.actions";
 import Contacts from "../pages/Contacts/Contacts";
-import { categoryManagerActions } from "../store/categoryManager/categoryManager.actions";
-import { globalThunkActions } from "../store/global/global.thunk-builder";
 import ContactsFeedback from "../pages/ContactsFeedback/ContactsFeedback";
 import AgentContactRequest from "../pages/AgentContactRequest/AgentContactRequest";
 import SupportChat from "../pages/SupportChat/SupportChat";
@@ -41,14 +36,9 @@ const MainRouterProvider = () => {
   const Layout = () => {
     const currentUser = useSelector(userSelectors.currentUser());
     const navigate = useNavigate();
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
       if (!currentUser) navigate(ROUTES.LOGIN_PAGE.FULL_ROUTE_NAME);
-      dispatch(userActions.getUsersThunk());
-      dispatch(contactActions.getContactsThunk());
-      dispatch(categoryManagerActions.initializeCategoryManagerThunk());
-      dispatch(globalThunkActions.globalInitThunk());
     }, []);
 
     return (

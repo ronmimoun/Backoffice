@@ -12,9 +12,8 @@ import { RemoveCategoryResponse } from "../../models/category/remove/removeCateg
 import { UpdateCategoryRequest } from "../../models/category/update/updateCategory.request";
 import { UpdateCategoryResponse } from "../../models/category/update/updateCategory.response";
 
-const categoryHttpInstance = createManagedAxiosInstance(
-  buildGeneralApiInstanceConfig(getBaseURl())
-);
+const getCategoryHttpInstance = () =>
+  createManagedAxiosInstance(buildGeneralApiInstanceConfig(getBaseURl()));
 
 const create = async (
   request: CreateCategoryRequest
@@ -26,7 +25,9 @@ const create = async (
   };
 
   const response =
-    await categoryHttpInstance.managedRequest<CreateCategoryResponse>(options);
+    await getCategoryHttpInstance().managedRequest<CreateCategoryResponse>(
+      options
+    );
   return response;
 };
 
@@ -40,7 +41,9 @@ const remove = async (
   };
 
   const response =
-    await categoryHttpInstance.managedRequest<RemoveCategoryResponse>(options);
+    await getCategoryHttpInstance().managedRequest<RemoveCategoryResponse>(
+      options
+    );
   return response;
 };
 
@@ -54,7 +57,9 @@ const update = async (
   };
 
   const response =
-    await categoryHttpInstance.managedRequest<UpdateCategoryResponse>(options);
+    await getCategoryHttpInstance().managedRequest<UpdateCategoryResponse>(
+      options
+    );
   return response;
 };
 

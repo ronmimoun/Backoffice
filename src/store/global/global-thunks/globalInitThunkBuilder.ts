@@ -1,25 +1,19 @@
-import {
-  createAsyncThunk,
-  ActionReducerMapBuilder,
-  PayloadAction,
-} from "@reduxjs/toolkit";
-import { countryApiService } from "../../../services/api/country.api.service";
-import { CountryModel } from "../../../types/country.type";
+import { createAsyncThunk, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { GlobalState } from "../global-state";
-
-type globalInitThunkResponse = {
-  countries: CountryModel[] | null;
-};
+import { categoryManagerActions } from "../../categoryManager/categoryManager.actions";
+import { userThunkActions } from "../../user/user.thunk-builder";
+import { contactActions } from "../../contact/contact.actions";
 
 export const globalInitThunk = createAsyncThunk(
   "global/globalInitThunk",
-  async (): Promise<globalInitThunkResponse> => {
-    const countryResponse = await countryApiService.query();
+  async (_, thunkApi) => {
+    await thunkApi.dispatch(
+      categoryManagerActions.initializeCategoryManagerThunk()
+    );
 
-    if (!countryResponse.isSucceeded || !countryResponse.data?.content)
-      return { countries: null };
+    await thunkApi.dispatch(userThunkActions.getUsersThunk());
 
-    return { countries: countryResponse.data.content };
+    await thunkApi.dispatch(contactActions.getContactsThunk());
   }
 );
 
@@ -28,13 +22,6 @@ export const globalInitThunkBuilder = (
 ) => {
   builder
     .addCase(globalInitThunk.pending, () => {})
-    .addCase(
-      globalInitThunk.fulfilled,
-      (state, action: PayloadAction<globalInitThunkResponse>) => {
-        if (action.payload.countries) {
-          state.countries = action.payload.countries;
-        }
-      }
-    )
+    .addCase(globalInitThunk.fulfilled, () => {})
     .addCase(globalInitThunk.rejected, () => {});
 };

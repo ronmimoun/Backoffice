@@ -59,7 +59,7 @@ const DataTable = <T extends GridValidRowModel>({
             quickFilterProps: { debounceMs: 500 },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[pageSize]}
         disableRowSelectionOnClick
         disableColumnFilter
         disableDensitySelector
