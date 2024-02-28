@@ -47,8 +47,6 @@ export const addJwtHeader = (config: InternalAxiosRequestConfig<any>) => {
   const jwt = store.getState().user.jwtToken;
   if (!jwt) return;
 
-  console.log("jwt", jwt);
-
   config.headers.Authorization = concatBearerToken(jwt);
 };
 

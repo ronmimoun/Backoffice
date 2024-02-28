@@ -31,14 +31,6 @@ const Navbar = () => {
         <span>Qleads</span>
       </div>
       <div className={classes.icons}>
-        {/* <img src="/search.svg" alt="" className={classes.icon} />
-        <img src="/app.svg" alt="" className={classes.icon} />
-        <img src="/expand.svg" alt="" className={classes.icon} />
-        <img src="/settings.svg" alt="" className={classes.icon} /> */}
-        {/* <div className={classes.notification}>
-          <img src="/notifications.svg" alt="" />
-          <span>1</span>
-        </div> */}
         <ButtonPrimary onClickFunction={handleLogout}>Logout</ButtonPrimary>
         <div className={classes.user}>
           <img src={currentUser.imgUrl?.url || NO_IMAGE_FALLBACK} alt="" />

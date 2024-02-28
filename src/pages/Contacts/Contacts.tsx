@@ -25,6 +25,10 @@ const Contacts = () => {
   const [contactList, setContactList] = useState<ContactModel[]>(contacts);
 
   useEffect(() => {
+    if (!contacts.length) dispatch(contactActions.getContactsThunk());
+  }, []);
+
+  useEffect(() => {
     if (!contactList.length) setContactList(contacts);
   }, [contacts]);
 

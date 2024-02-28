@@ -6,13 +6,16 @@ import AppLoader from "./components/utils/AppLoader/AppLoader.tsx";
 import { Suspense } from "react";
 import { PopupContainer } from "./components/feature/PopupContainer/PopupContainer.tsx";
 import "react-toastify/dist/ReactToastify.css";
+import GlobalErrorBoundary from "./components/feature/GlobalErrorBoundary/GlobalErrorBoundary.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Provider store={store}>
-    <Suspense fallback="Loading...">
-      <AppLoader />
-      <PopupContainer />
-      <App />
-    </Suspense>
-  </Provider>
+  <GlobalErrorBoundary>
+    <Provider store={store}>
+      <Suspense fallback="Loading...">
+        <AppLoader />
+        <PopupContainer />
+        <App />
+      </Suspense>
+    </Provider>
+  </GlobalErrorBoundary>
 );
