@@ -1,7 +1,7 @@
 import { GridColDef, GridValidRowModel } from "@mui/x-data-grid";
 import ActionColumnBase, {
   ActionColumn,
-} from "../components/dataTable/ActionColumnBase/ActionColumnBase";
+} from "../components/ui/table/ActionColumnBase/ActionColumnBase";
 
 type GetActionColumnBase<T> = {
   actions: ActionColumn<T>[];

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, Reducer } from "@reduxjs/toolkit";
-import { DataTablePropsBase } from "../../components/dataTable/DataTable";
+import { TableBaseProps } from "../../components/ui/table/TableBase/TableBase";
 import { ModalState } from "./modal-state";
 import { ContactApplyRequestInfo } from "../../types/agent-contact-request.type";
 
@@ -56,7 +56,7 @@ export const modalSlice = createSlice({
 
     setTableModalPayload<T>(
       state: ModalState,
-      action: PayloadAction<DataTablePropsBase<T>>
+      action: PayloadAction<TableBaseProps<T>>
     ) {
       state.tableModal.isOpen = true;
       state.tableModal.modalPayload = action.payload;

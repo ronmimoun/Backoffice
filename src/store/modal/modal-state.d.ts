@@ -1,7 +1,7 @@
 import {
-  DataTableProps,
-  DataTablePropsBase,
-} from "../../components/dataTable/DataTable";
+  TableProps,
+  TableBaseProps,
+} from "../../components/ui/table/TableBase/TableBase";
 import { ContactModel } from "../../types/contact.type";
 
 export type ModalState = {
@@ -16,4 +16,4 @@ type ModalBase = {
   modalPayload?: ModalPayload;
 };
 
-type ModalPayload = ContactModel | DataTablePropsBase;
+type ModalPayload = ContactModel | TableBaseProps;

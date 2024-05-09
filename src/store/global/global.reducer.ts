@@ -5,7 +5,6 @@ import { globalThunkActionBuilder } from "./global.thunk-builder";
 const initialState: GlobalState = {
   loaderCount: 0,
   error: null,
-  countries: [],
 };
 
 export const globalSlice = createSlice({

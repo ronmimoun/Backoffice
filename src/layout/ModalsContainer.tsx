@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { RenderByBoolean } from "../components/utils/RenderByBoolean/RenderByBoolean";
+import { RenderByBoolean } from "../components/shared/RenderByBoolean/RenderByBoolean";
 import { modalSelectors } from "../store/modal/modal.selectors";
-import AddUserModal from "../components/modals/AddUserModal/AddUserModal";
-import TableModalWrapper from "../components/modals/TableModal/TableModal";
-import { AddContactModal } from "../components/modals/AddContactModal/AddContactModal";
-import { ApproveAgentContactModal } from "../components/modals/ApproveAgentContactModal/ApproveAgentContactModal";
+import AddUserModal from "../components/feature/modals/AddUserModal/AddUserModal";
+import TableModalWrapper from "../components/ui/modals/TableModal/TableModal";
+import { AddContactModal } from "../components/feature/modals/AddContactModal/AddContactModal";
+import { ApproveAgentContactModal } from "../components/feature/modals/ApproveAgentContactModal/ApproveAgentContactModal";
 
 export const ModalsContainer = () => {
   const isAddUserModalOpen = useSelector(modalSelectors.isAddUserModalOpen());

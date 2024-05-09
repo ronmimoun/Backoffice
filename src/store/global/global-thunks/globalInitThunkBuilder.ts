@@ -1,6 +1,8 @@
 import { createAsyncThunk, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import { GlobalState } from "../global-state";
 import { categoryManagerActions } from "../../categoryManager/categoryManager.actions";
+import { userThunkActions } from "../../user/user.thunk-builder";
+import { contactThunkActions } from "../../contact/contact.thunk-builder";
 
 export const globalInitThunk = createAsyncThunk(
   "global/globalInitThunk",
@@ -8,6 +10,10 @@ export const globalInitThunk = createAsyncThunk(
     await thunkApi.dispatch(
       categoryManagerActions.initializeCategoryManagerThunk()
     );
+
+    await thunkApi.dispatch(userThunkActions.getUsersThunk());
+
+    await thunkApi.dispatch(contactThunkActions.getContactsThunk());
   }
 );
 
