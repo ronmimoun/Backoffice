@@ -15,7 +15,7 @@ import {
   ApprovalAgentContactForm,
 } from "../../../../form/schemas/approvalAgentContactSchema";
 import { categoryManagerSelectors } from "../../../../store/categoryManager/categoryManager.selectors";
-import { Input } from "../../../ui/Input/Input";
+import { Input } from "../../../ui/Input/InputBase/Input";
 import { Box, Typography } from "@mui/material";
 import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
 import BasicSelectController from "../../../controllers/BasicSelectController/BasicSelectController";

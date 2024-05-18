@@ -5,11 +5,10 @@ import { contactSelectors } from "../../../store/contact/contact.selectors";
 import { getContactsColumns } from "../../../columns/contacts.column";
 import { useAppDispatch } from "../../../store";
 import { ContactModel } from "../../../types/contact.type";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ActionColumn } from "../../../components/ui/table/ActionColumnBase/ActionColumnBase";
 import { EditIcon, TrashIcon } from "../../../components/ui/Icons";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../constants/routes.constants";
 import { contactActions } from "../../../store/contact/contact.actions";
 import { ApiResponse } from "../../../models/base/api-base";
 import { Box, Typography } from "@mui/material";
@@ -107,7 +106,7 @@ const Contacts = () => {
         icon: <TrashIcon />,
       },
     ];
-  }, []);
+  }, [handleRowRemove]);
 
   return (
     <Box className={classes.container}>

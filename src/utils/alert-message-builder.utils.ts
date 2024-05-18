@@ -10,11 +10,6 @@ import {
 } from "../types/alert/AlertMessage.type";
 import { isServerErrorType } from "./api-response-builders.utils";
 
-// const GENERAL_ERROR_TITLE_TEXT: TranslationText = {
-//   text: "An Problem Occurred",
-//   isTranslationKey: true,
-// };
-
 export function buildApiFailureResponseAlertMessage(
   error: AxiosError,
   errorSource: ApiErrorSourceEnum,
@@ -29,29 +24,6 @@ export function buildApiFailureResponseAlertMessage(
   }
 
   return buildAlertMessage({}, error);
-  // const isLockout: boolean | undefined = requestErrorOptions?.isLockout;
-  // const alertMessageBuilderFunc = getAlertMessageBuilderFunc(isLockout);
-
-  // switch (errorSource) {
-  //   case ApiErrorSourceEnum.RequestAPIError:
-  //     return buildRequestAPIAlertMessage(
-  //       error,
-  //       isLockout,
-  //       requestErrorOptions?.title || GENERAL_ERROR_TITLE_TEXT
-  //     );
-  //   case ApiErrorSourceEnum.RequestNetworkError:
-  //     return alertMessageBuilderFunc({
-  //       title: GENERAL_ERROR_TITLE_TEXT,
-  //       content: {
-  //         text: "אירעה בעיה בעת ניסון התחברות לשרת",
-  //         isTranslationKey: true,
-  //       },
-  //     });
-  //   default:
-  //     return alertMessageBuilderFunc({
-  //       title: GENERAL_ERROR_TITLE_TEXT,
-  //     });
-  // }
 }
 
 function isCustomErrorAlert(
@@ -128,7 +100,7 @@ function buildAlertMessage(
   { title, content, code }: AlertMessageBuilderArg,
   error?: AxiosError
 ): AlertMessage {
-  if (error) {
+  if (error?.response) {
     return {
       title: (error.response?.data as ServerError).status,
       content: (error.response?.data as ServerError).message,
@@ -137,9 +109,9 @@ function buildAlertMessage(
   }
 
   return {
-    title: title,
+    title: title || "Unknown Error",
     content: content || "Some Problem Occurred",
-    code,
+    code: code || 0,
   };
 }
 

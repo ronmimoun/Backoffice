@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../../ui/Input/Input";
+import { Input } from "../../../ui/Input/InputBase/Input";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { categoryManagerSelectors } from "../../../../store/categoryManager/categoryManager.selectors";

@@ -1,6 +1,6 @@
 import classes from "../configurationManager.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../../ui/Input/Input";
+import { Input } from "../../../ui/Input/InputBase/Input";
 import { useCallback } from "react";
 import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
 import { ADD_JOB_TITLE_CONFIG } from "../../../../form/schemas/addJobTitleSchema";

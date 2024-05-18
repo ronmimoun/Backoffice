@@ -8,7 +8,7 @@ import {
 } from "../../../form/schemas/addCompanyContactsSchema";
 import { useSelector } from "react-redux";
 import { categoryManagerSelectors } from "../../../store/categoryManager/categoryManager.selectors";
-import { Input } from "../../../components/ui/Input/Input";
+import { Input } from "../../../components/ui/Input/InputBase/Input";
 import { Breadcrumb } from "../../../components/shared/Breadcrumb/Breadcrumb";
 import { ButtonPrimary } from "../../../components/ui/Button/ButtonPrimary";
 import { zodResolver } from "@hookform/resolvers/zod";

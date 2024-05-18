@@ -16,6 +16,14 @@ import { CreateManyContactsResponse } from "../../models/contact/createMany/crea
 import { CreateManyContactsRequest } from "../../models/contact/createMany/createManyContacts.request";
 import { RemoveContactByIdRequest } from "../../models/contact/remove/removeContactById.request";
 import { RemoveContactByIdResponse } from "../../models/contact/remove/removeContactById.response";
+import {
+  UpdateSubmittedInfoSearchRequest,
+  UpdateSubmittedInfoSearchResponse,
+} from "../../types/contact/updateContactAiInformation.type";
+import {
+  UpdateLastGeneratedInfoSearchRequest,
+  UpdateLastGeneratedInfoSearchResponse,
+} from "../../types/contact/updateLastGeneratedInfoSearch.type";
 
 const getContactHttpInstance = () =>
   createManagedAxiosInstance(buildGeneralApiInstanceConfig(getBaseURl()));
@@ -110,6 +118,38 @@ const createMany = async (
   return response;
 };
 
+const updateSubmittedInfoSearch = async (
+  requestPayload: UpdateSubmittedInfoSearchRequest
+): Promise<ApiResponse<UpdateSubmittedInfoSearchResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: "/contacts/updateSubmittedInfoSearch",
+    data: requestPayload,
+  };
+
+  const response =
+    await getContactHttpInstance().managedRequest<UpdateSubmittedInfoSearchResponse>(
+      options
+    );
+  return response;
+};
+
+const updateLastGeneratedInfoSearch = async (
+  requestPayload: UpdateLastGeneratedInfoSearchRequest
+): Promise<ApiResponse<UpdateLastGeneratedInfoSearchResponse>> => {
+  const options: AxiosRequestConfig = {
+    method: "post",
+    url: "/contacts/updateLastGeneratedInfoSearch",
+    data: requestPayload,
+  };
+
+  const response =
+    await getContactHttpInstance().managedRequest<UpdateLastGeneratedInfoSearchResponse>(
+      options
+    );
+  return response;
+};
+
 export const contactApiService = {
   getContacts,
   removeContactById,
@@ -117,4 +157,6 @@ export const contactApiService = {
   update,
   create,
   createMany,
+  updateContactAiInformation: updateSubmittedInfoSearch,
+  updateLastGeneratedInfoSearch,
 };

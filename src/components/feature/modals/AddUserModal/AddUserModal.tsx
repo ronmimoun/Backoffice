@@ -1,7 +1,7 @@
 import classes from "./AddUserModal.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
 import { ModalBase } from "../../../ui/modals/ModalBase/ModalBase";
-import { Input } from "../../../ui/Input/Input";
+import { Input } from "../../../ui/Input/InputBase/Input";
 import {
   ADD_USER_FORM_CONFIG,
   ADD_USER_SCHEMA,

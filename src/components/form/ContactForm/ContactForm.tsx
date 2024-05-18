@@ -11,7 +11,7 @@ import { ContactModel } from "../../../types/contact.type";
 import { contactUtilService } from "../../../utils/contact.utils";
 import { useCallback, useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { Input } from "../../ui/Input/Input";
+import { Input } from "../../ui/Input/InputBase/Input";
 import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
 import { useSelector } from "react-redux";
 import { categoryManagerSelectors } from "../../../store/categoryManager/categoryManager.selectors";

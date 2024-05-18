@@ -3,7 +3,7 @@ import { ModalBase } from "../../../ui/modals/ModalBase/ModalBase";
 import { useCallback, useEffect, useState } from "react";
 import { ButtonPrimary } from "../../../ui/Button/ButtonPrimary";
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../../ui/Input/Input";
+import { Input } from "../../../ui/Input/InputBase/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppDispatch } from "../../../../store";
 import { Breadcrumb } from "../../../shared/Breadcrumb/Breadcrumb";

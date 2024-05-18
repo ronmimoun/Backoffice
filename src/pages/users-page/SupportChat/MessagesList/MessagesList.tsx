@@ -1,7 +1,7 @@
 import classes from "./MessagesList.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
 import { ButtonPrimary } from "../../../../components/ui/Button/ButtonPrimary";
-import { Input } from "../../../../components/ui/Input/Input";
+import { Input } from "../../../../components/ui/Input/InputBase/Input";
 import { Box } from "@mui/material";
 import { ChatModel, MessageModel } from "../../../../types/support-chat.type";
 import { List } from "@mui/material";
@@ -14,7 +14,7 @@ import {
   SupportChatForm,
 } from "../../../../form/schemas/supportChatSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { supportChatApiService } from "../../../../services/api/supportChat.service.api.service";
+import { supportChatApiService } from "../../../../services/api/supportChat.api.service";
 import { CreateSupportChatRequest } from "../../../../models/support-chat/create/createSupportChat.request";
 import { useSelector } from "react-redux";
 import { userSelectors } from "../../../../store/user/user.selectors";

@@ -1,6 +1,6 @@
 import classes from "./login.module.scss";
 import { FormProvider, useForm } from "react-hook-form";
-import { Input } from "../../../components/ui/Input/Input";
+import { Input } from "../../../components/ui/Input/InputBase/Input";
 import { ButtonPrimary } from "../../../components/ui/Button/ButtonPrimary";
 import {
   LOGIN_FORM_CONFIG,

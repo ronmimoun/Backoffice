@@ -12,6 +12,7 @@ export type IApiError = {
 
 export interface ServerError {
   status: string;
+  errorCode: string;
   message: string;
 }
 

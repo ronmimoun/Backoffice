@@ -9,7 +9,7 @@ import { useAppDispatch } from "../../../../store";
 import { userActions } from "../../../../store/user/user.actions";
 import { ApiResponse } from "../../../../models/base/api-base";
 import { useNavigate } from "react-router-dom";
-import { ROUTES } from "../../../../constants/routes.constants";
+import { LOGIN_PAGE_ROUTES } from "../../../../routes/login-routes";
 
 const Navbar = () => {
   const currentUser = useSelector(userSelectors.currentUser());
@@ -20,7 +20,7 @@ const Navbar = () => {
     const response = (await dispatch(userActions.logoutThunk()))
       .payload as ApiResponse<void>;
     if (!response.isSucceeded) return;
-    nav(ROUTES.LOGIN_PAGE.FULL_ROUTE_NAME);
+    nav(LOGIN_PAGE_ROUTES.FULL_ROUTE_NAME);
   }, []);
 
   if (!currentUser) return <></>;

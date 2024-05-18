@@ -1,7 +1,7 @@
 import classes from "./single.module.scss";
 import { UserModel } from "../../../../types/user.type";
 import ParsedObjectDetails from "../../../../components/shared/ParsedObjectDetails/ParsedObjectDetails";
-import { Input } from "../../../../components/ui/Input/Input";
+import { Input } from "../../../../components/ui/Input/InputBase/Input";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   USER_FORM_CONFIG,

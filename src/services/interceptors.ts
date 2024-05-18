@@ -4,114 +4,62 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { ApiErrorSourceEnum } from "../models/base/api-base";
-import { addJwtHeader, handleError, handleLoader } from "./handlers";
+
+import { concatBearerToken } from "../utils/header.util";
+import { store } from "../utils/non-circular-injection.utils";
+import {
+  handleAxiosCancel,
+  handleErrorResponse,
+  handleLoader,
+  onRequestRejected,
+  retryRequest,
+  shouldRetryRequest,
+} from "./interceptors-functions-core";
 
 export function addInterceptors(instance: AxiosInstance) {
-  instance.interceptors.request.use(onRequestFulfilled, onRequestRejected);
+  instance.interceptors.request.use(
+    onServerRequestFulfilled,
+    onRequestRejected
+  );
 
   const onResponseRejectedRetry = async (error: AxiosError) => {
-    return await onResponseRejected(error, instance);
+    return await onServerResponseRejected(error, instance);
   };
   instance.interceptors.response.use(
-    onResponseFulfilled,
+    onServerResponseFulfilled,
     onResponseRejectedRetry
   );
 }
 
-function onRequestFulfilled(config: InternalAxiosRequestConfig<any>) {
+function onServerRequestFulfilled(config: InternalAxiosRequestConfig<any>) {
   handleLoader(config.loaderOptions);
   addJwtHeader(config);
-
-  if (config.headers.Authorization) return config;
-
   return config;
 }
 
-function onRequestRejected(error: any) {
-  return Promise.reject(error);
-}
+export const addJwtHeader = (config: InternalAxiosRequestConfig<any>) => {
+  if (config.headers.Authorization) return;
 
-function onResponseFulfilled(response: AxiosResponse<any, any>) {
-  handleLoader(response.config.loaderOptions, false);
+  const jwt = store.getState().user.jwtToken;
+  if (!jwt) return;
+
+  config.headers.Authorization = concatBearerToken(jwt);
+};
+
+export function onServerResponseFulfilled(response: AxiosResponse<any, any>) {
+  handleLoader(response.config?.loaderOptions, false);
   return response;
 }
 
-function onResponseRejected(error: AxiosError, instance: AxiosInstance) {
+function onServerResponseRejected(error: AxiosError, instance: AxiosInstance) {
   const config = error.config;
 
-  if (!!axios.isCancel(error) === true) {
-    console.log("Request canceled", error);
-    handleLoader(config?.loaderOptions, false);
-    return Promise.reject(error);
-  }
+  const axiosCancellation = handleAxiosCancel(axios, error, config);
+  if (axiosCancellation) return axiosCancellation;
 
   if (shouldRetryRequest(config)) return retryRequest(error, instance);
 
-  let errorSource: ApiErrorSourceEnum = ApiErrorSourceEnum.RequestUnknownError;
-  if ((error as AxiosError<unknown, any>).response) {
-    console.log(
-      "API error",
-      (error as AxiosError<unknown, any>).response?.data
-    );
-    errorSource = ApiErrorSourceEnum.RequestAPIError;
-  } else if ((error as AxiosError<unknown, any>).request) {
-    console.log("Network error", (error as AxiosError<unknown, any>).request);
-    errorSource = ApiErrorSourceEnum.RequestNetworkError;
-  } else {
-    console.log(
-      "Unknown request error",
-      (error as AxiosError<unknown, any>).message
-    );
-  }
+  handleErrorResponse(error);
 
-  handleError(error, errorSource);
-  handleLoader(config?.loaderOptions, false);
   return Promise.reject(error);
 }
-
-const shouldRetryRequest = (
-  config: InternalAxiosRequestConfig<any> | undefined
-): boolean => {
-  if (!config || !config.retryOptions?.retry) return false;
-
-  config.retryOptions.__retryCount = config.retryOptions.__retryCount || 0;
-
-  if (config.retryOptions.__retryCount >= config.retryOptions.retry)
-    return false;
-
-  return true;
-};
-
-const retryRequest = (
-  error: AxiosError,
-  instance: AxiosInstance
-): Promise<any> => {
-  const config = error.config;
-
-  if (!config || !config.retryOptions?.retry) {
-    handleLoader(config?.loaderOptions, false);
-    return Promise.reject(error);
-  }
-
-  if (!config.retryOptions.__retryCount) {
-    config.retryOptions.__retryCount = 0;
-  }
-
-  config.retryOptions.__retryCount += 1;
-
-  const delayRetryRequest = new Promise<void>((resolve) => {
-    setTimeout(() => {
-      console.log(
-        `Retry #${config.retryOptions?.__retryCount} the request`,
-        config.url
-      );
-      resolve();
-    }, config.retryOptions?.retryDelay || 100);
-  });
-
-  return delayRetryRequest.then(() => {
-    handleLoader(config.loaderOptions, false);
-    instance(config);
-  });
-};

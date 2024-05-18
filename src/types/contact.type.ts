@@ -21,6 +21,7 @@ export type ContactModel = {
   averageRating: number;
   numberOfRatings: number;
   _id: string;
+  llmInformation?: llmInformationModel;
 };
 
 export type EmailModel = {
@@ -45,4 +46,9 @@ export type TransactionHistoryModel = {
   priceInCredit: number;
   userId: string;
   type: string;
+};
+
+export type llmInformationModel = {
+  submittedInfoSearch?: string | null;
+  lastGeneratedInfoSearch?: string | null;
 };
