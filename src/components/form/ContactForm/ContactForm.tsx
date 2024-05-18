@@ -15,7 +15,6 @@ import { Input } from "../../ui/Input/InputBase/Input";
 import { ButtonPrimary } from "../../ui/Button/ButtonPrimary";
 import { useSelector } from "react-redux";
 import { categoryManagerSelectors } from "../../../store/categoryManager/categoryManager.selectors";
-import { globalSelectors } from "../../../store/global/global.selectors";
 import { UserModel } from "../../../types/user.type";
 import { contactSelectors } from "../../../store/contact/contact.selectors";
 import { userSelectors } from "../../../store/user/user.selectors";

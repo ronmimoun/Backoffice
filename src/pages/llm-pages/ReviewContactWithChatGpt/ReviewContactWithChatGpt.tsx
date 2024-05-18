@@ -8,7 +8,7 @@ import { ContactModel } from "../../../types/contact.type";
 import { ActionColumn } from "../../../components/ui/table/ActionColumnBase/ActionColumnBase";
 import { RenderByBoolean } from "../../../components/shared/RenderByBoolean/RenderByBoolean";
 import { llmApiService } from "../../../services/api/llm.api.service";
-import { GetContactDetailsRequest } from "../../../types/llm/get-contact-details";
+import { GetContactLLMInfoSearchRequest } from "../../../types/llm/getContactLLMInfoSearch.type";
 import { ReviewContactInformation } from "./ReviewContactInformation/ReviewContactInformation";
 import { contactApiService } from "../../../services/api/contact.api.service";
 import { useAppDispatch } from "../../../store";
@@ -58,14 +58,14 @@ export const ReviewContactWithChatGpt = () => {
 
   const handleGetContactInformation = useCallback(
     async (contact: ContactModel): Promise<string | undefined> => {
-      const payload: GetContactDetailsRequest = {
+      const payload: GetContactLLMInfoSearchRequest = {
         name: contact.name,
         lastName: contact.familyName,
         company: contact.company,
         jobTitle: contact.jobTitle,
       };
 
-      const response = await llmApiService.getContactDetails(payload);
+      const response = await llmApiService.getContactLLMInfoSearch(payload);
 
       if (!response.isSucceeded || !response.data || !response.data.content)
         return response.data?.content;

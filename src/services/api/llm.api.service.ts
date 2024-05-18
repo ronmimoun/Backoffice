@@ -6,28 +6,30 @@ import {
 } from "../instances";
 import { getBaseURl } from "../../utils/api.utils";
 import {
-  GetContactDetailsRequest,
-  GetContactDetailsResponse,
-} from "../../types/llm/get-contact-details";
+  GetContactLLMInfoSearchRequest,
+  GetContactLLMInfoSearchResponse,
+} from "../../types/llm/getContactLLMInfoSearch.type";
 
 const llmHttpInstance = createManagedAxiosInstance(
   buildGeneralApiInstanceConfig(getBaseURl())
 );
 
-const getContactDetails = async (
-  request: GetContactDetailsRequest
-): Promise<ApiResponse<GetContactDetailsResponse>> => {
+const getContactLLMInfoSearch = async (
+  request: GetContactLLMInfoSearchRequest
+): Promise<ApiResponse<GetContactLLMInfoSearchResponse>> => {
   const options: AxiosRequestConfig = {
     method: "post",
-    url: "/llm/getContactDetails",
+    url: "/llm/getContactLLMInfoSearch",
     data: request,
   };
 
   const response =
-    await llmHttpInstance.managedRequest<GetContactDetailsResponse>(options);
+    await llmHttpInstance.managedRequest<GetContactLLMInfoSearchResponse>(
+      options
+    );
   return response;
 };
 
 export const llmApiService = {
-  getContactDetails,
+  getContactLLMInfoSearch,
 };

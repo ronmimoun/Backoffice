@@ -13,7 +13,6 @@ import { Work } from "@mui/icons-material";
 import { Business } from "@mui/icons-material";
 import { Category } from "@mui/icons-material";
 import { Flag } from "@mui/icons-material";
-import { ROUTES } from "./routes.constants";
 import { LLM_PAGE_ROUTES } from "../routes/llm-routes";
 import { BOARD_PAGE_ROUTES } from "../routes/board-routes";
 import { USERS_PAGE_ROUTES } from "../routes/users-routes";
