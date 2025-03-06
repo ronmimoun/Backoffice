@@ -63,7 +63,20 @@ export const createManagedAxiosInstance = (
 };
 
 export const buildGeneralApiInstanceConfig = (baseURL: string) => {
-  const timeout = Number(import.meta.env.VITE_API_KEY) * 1000;
+  // Use a default timeout of 30 seconds if VITE_API_KEY is not defined or not a valid number
+  const timeoutInSeconds = import.meta.env.VITE_API_TIMEOUT_SECONDS;
+  const timeout = timeoutInSeconds ? Number(timeoutInSeconds) * 1000 : 30000;
+
+  // Ensure baseURL is valid
+  if (!baseURL) {
+    console.error(
+      "Invalid baseURL provided to buildGeneralApiInstanceConfig:",
+      baseURL
+    );
+    // Fallback to a default URL if needed
+    baseURL = import.meta.env.VITE_APP_LOCAL || "http://localhost:8080/api/";
+  }
+
   const config: CreateAxiosDefaults<any> = {
     baseURL,
     timeout,
