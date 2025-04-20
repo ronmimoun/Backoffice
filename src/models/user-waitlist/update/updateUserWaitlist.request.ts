@@ -1,7 +1,6 @@
-import { UserWaitlistEnum } from "../../../enums/userWaitlist.enum";
-import { UserWaitlistModel } from "../../../types/user-waitlist.type";
+import { ApproveUserStatusEnum } from "../../../enums/userWaitlist.enum";
 
 export type UpdateUserWaitlistRequest = {
-  status: UserWaitlistEnum;
-  pendingUser: UserWaitlistModel;
+  status: ApproveUserStatusEnum;
+  userId: string;
 };

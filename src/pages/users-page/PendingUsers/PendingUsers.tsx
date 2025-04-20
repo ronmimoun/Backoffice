@@ -5,8 +5,7 @@ import TableBase from "../../../components/ui/table/TableBase/TableBase";
 import { pendingUsersColumn } from "../../../columns/pending-users.column";
 import { ActionColumn } from "../../../components/ui/table/ActionColumnBase/ActionColumnBase";
 import { STYLES } from "../../../constants/style.constants";
-import { objectUtilService } from "../../../utils/object.utils";
-import { UserWaitlistEnum } from "../../../enums/userWaitlist.enum";
+import { ApproveUserStatusEnum } from "../../../enums/userWaitlist.enum";
 import { Breadcrumb } from "../../../components/shared/Breadcrumb/Breadcrumb";
 
 const PendingUsers = () => {
@@ -24,24 +23,27 @@ const PendingUsers = () => {
   }, []);
 
   const handleApprove = useCallback(
-    async (pendingUser: UserWaitlistModel, status: UserWaitlistEnum) => {
+    async (pendingUser: UserWaitlistModel, status: ApproveUserStatusEnum) => {
       if (!userWaitlist.length) return;
 
-      const request = {
-        pendingUser,
+      const response = await userWaitlistApiService.update({
         status,
-      };
+        userId: pendingUser._id,
+      });
 
-      const response = await userWaitlistApiService.update(request);
       if (!response.isSucceeded || !response.data?.content) return;
 
-      const updatedEntities = objectUtilService.updateObjectById(
-        userWaitlist,
-        response.data.content._id,
-        response.data.content
-      );
+      const updatedUser = response.data.content;
 
-      setUserWaitlist(updatedEntities);
+      setUserWaitlist((prevList) => {
+        const newList = [...prevList];
+        const index = newList.findIndex((user) => user._id === updatedUser._id);
+
+        if (index === -1) return prevList;
+
+        newList[index] = updatedUser;
+        return newList;
+      });
     },
     [userWaitlist]
   );
@@ -50,13 +52,13 @@ const PendingUsers = () => {
     return [
       {
         actionFunction: (entity) =>
-          handleApprove(entity, UserWaitlistEnum.APPROVED),
+          handleApprove(entity, ApproveUserStatusEnum.APPROVED),
         text: "Approve",
         className: STYLES.CLASS_NAMES.BUTTONS.PRIMARY_BUTTON,
       },
       {
         actionFunction: (entity) =>
-          handleApprove(entity, UserWaitlistEnum.REJECTED),
+          handleApprove(entity, ApproveUserStatusEnum.REJECTED),
         text: "Reject",
         className: STYLES.CLASS_NAMES.BUTTONS.PRIMARY_BUTTON,
       },

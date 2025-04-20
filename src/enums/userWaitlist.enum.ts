@@ -1,5 +1,5 @@
-export enum UserWaitlistEnum {
-  APPROVED = "approved",
-  PENDING = "pending",
-  REJECTED = "rejected",
+export enum ApproveUserStatusEnum {
+  APPROVED = "Approved",
+  PENDING = "Pending",
+  REJECTED = "Rejected",
 }
