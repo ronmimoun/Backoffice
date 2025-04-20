@@ -19,16 +19,24 @@ import { UpdateUserResponse } from "../../../../models/user/update-user/updateUs
 import { dateUtilService } from "../../../../utils/date.utils";
 import { DateFormatsEnum } from "../../../../enums/DateFormats.enum";
 import { NO_IMAGE_FALLBACK } from "../../../../constants/image.constants";
+import BasicSelectController from "../../../../components/controllers/BasicSelectController/BasicSelectController";
+import { UpdateUserRequest } from "../../../../models/user/update-user/updateUser.request";
 
 type SingleProps = {
   user: UserModel;
+  onSubmit: (updatedUser: UserModel) => void;
   chart?: {
     dataKeys: { name: string; color: string }[];
     data: object[];
   };
 };
 
-const Single = ({ user }: SingleProps) => {
+const ADMIN_OPTIONS = [
+  { name: "Yes", value: "true" },
+  { name: "No", value: "false" },
+];
+
+const Single = ({ user, onSubmit }: SingleProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const formMethods = useForm<EditUserForm>({
     defaultValues: {
@@ -40,16 +48,21 @@ const Single = ({ user }: SingleProps) => {
         user.phone || USER_FORM_CONFIG.INPUTS.PHONE.DEFAULT_VALUE,
       [USER_FORM_CONFIG.INPUTS.ADDRESS.KEY]:
         user.address || USER_FORM_CONFIG.INPUTS.ADDRESS.DEFAULT_VALUE,
+      [USER_FORM_CONFIG.INPUTS.IS_ADMIN.KEY]: user.isAdmin
+        ? ADMIN_OPTIONS[0].value.toString()
+        : ADMIN_OPTIONS[1].value.toString(),
     },
     resolver: zodResolver(USER_SCHEMA),
   });
   const dispatch = useAppDispatch();
 
+  console.log("user", user);
+
   const parsedUserDetails = useMemo(() => {
     return {
       Id: user._id,
       Gender: user.gender,
-      "Is Admin": user.isAdmin,
+      "Is Admin": `${user.isAdmin}`,
       Email: user.email,
       "Created at": dateUtilService.getFormattedDate(
         user.createdAt,
@@ -67,20 +80,27 @@ const Single = ({ user }: SingleProps) => {
     };
   }, [user]);
 
-  const onSubmit = useCallback(async (data: EditUserForm) => {
-    setIsLoading(true);
-    const requestData = {
-      ...data,
-      _id: user._id,
-    };
-    const response = (await dispatch(
-      userActions.updateUserThunk(requestData)
-    )) as PayloadAction<ApiResponse<UpdateUserResponse>>;
+  const handleSubmit = useCallback(
+    async (data: EditUserForm) => {
+      setIsLoading(true);
 
-    setIsLoading(false);
-    if (!response.payload.isSucceeded || !response.payload.data?.content)
-      return;
-  }, []);
+      const requestData: UpdateUserRequest = {
+        ...data,
+        isAdmin: data.isAdmin === "true",
+        _id: user._id,
+      };
+
+      const response = (await dispatch(
+        userActions.updateUserThunk(requestData)
+      )) as PayloadAction<ApiResponse<UpdateUserResponse>>;
+
+      setIsLoading(false);
+      if (!response.payload.isSucceeded || !response.payload.data?.content)
+        return;
+      onSubmit(response.payload.data.content);
+    },
+    [onSubmit]
+  );
 
   return (
     <div className={classes.single}>
@@ -96,7 +116,9 @@ const Single = ({ user }: SingleProps) => {
       <FormProvider {...formMethods}>
         <form
           className={classes.edit}
-          onSubmit={formMethods.handleSubmit(onSubmit)}
+          onSubmit={formMethods.handleSubmit(handleSubmit, (errors) => {
+            console.log("errors", errors);
+          })}
         >
           <Input
             className={classes.edit__input}
@@ -118,6 +140,14 @@ const Single = ({ user }: SingleProps) => {
             name={USER_FORM_CONFIG.INPUTS.ADDRESS.KEY}
             label={USER_FORM_CONFIG.INPUTS.ADDRESS.LABEL}
           />
+          <BasicSelectController
+            className={classes.edit__input}
+            list={ADMIN_OPTIONS}
+            name={USER_FORM_CONFIG.INPUTS.IS_ADMIN.KEY}
+            textAccessor="name"
+            valueAccessor="value"
+            label={USER_FORM_CONFIG.INPUTS.IS_ADMIN.LABEL}
+          />
           <ButtonPrimary isLoading={isLoading} type="submit">
             Submit
           </ButtonPrimary>
@@ -128,53 +158,3 @@ const Single = ({ user }: SingleProps) => {
 };
 
 export default Single;
-
-{
-  /* {chart && <div className={classes.chart}></div>} */
-}
-
-{
-  /* <div className="activities">
-        <h2>Latest Activities</h2>
-        {props.activities && (
-          <ul>
-            {props.activities.map((activity) => (
-              <li key={activity.text}>
-                <div>
-                  <p>{activity.text}</p>
-                  <time>{activity.time}</time>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div> */
-}
-
-{
-  /* <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                width={500}
-                height={300}
-                data={props.chart.data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                {props.chart.dataKeys.map((dataKey) => (
-                  <Line
-                    type="monotone"
-                    dataKey={dataKey.name}
-                    stroke={dataKey.color}
-                  />
-                ))}
-              </LineChart>
-            </ResponsiveContainer> */
-}

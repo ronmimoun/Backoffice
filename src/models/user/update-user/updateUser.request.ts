@@ -4,4 +4,5 @@ import { ImageModel } from "../../../types/image.type";
 export type UpdateUserRequest = {
   _id: string;
   imgUrl?: ImageModel;
-} & Partial<EditUserForm>;
+  isAdmin: boolean;
+} & Omit<Partial<EditUserForm>, "isAdmin">;

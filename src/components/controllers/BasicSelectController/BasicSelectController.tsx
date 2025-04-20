@@ -32,7 +32,7 @@ const BasicSelectController = <T,>({
       rules={{ required: true }}
       render={({ field }) => {
         return (
-          <Box className={classes.select_container}>
+          <Box className={classes.select_container + " " + props.className}>
             {props.label && (
               <InputLabel className={classes.select_label}>
                 {props.required ? "*" : ""}

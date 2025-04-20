@@ -5,6 +5,7 @@ export const USER_SCHEMA = z.object({
   email: z.string().email(),
   phone: z.string(),
   address: z.string(),
+  isAdmin: z.string().optional(),
 });
 
 export type EditUserForm = z.infer<typeof USER_SCHEMA>;
@@ -35,6 +36,15 @@ export const USER_FORM_CONFIG = {
       DEFAULT_VALUE: "",
       PLACEHOLDER: "Edit address",
       LABEL: "Address",
+    },
+    IS_ADMIN: {
+      KEY: "isAdmin",
+      DEFAULT_VALUE: false,
+      LABEL: "Is Admin",
+      ACCESSORS: {
+        NAME: "name",
+        VALUE: "value",
+      },
     },
   },
 };

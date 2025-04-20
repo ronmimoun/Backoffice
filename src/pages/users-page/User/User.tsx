@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { userSelectors } from "../../../store/user/user.selectors";
 import { useCallback, useEffect, useState } from "react";
 import { userApiService } from "../../../services/api/user.api.service";
+import { UserModel } from "../../../types/user.type";
 
 const User = () => {
   const { _id } = useParams();
@@ -24,10 +25,14 @@ const User = () => {
     setUser(response.data.content);
   }, []);
 
+  const handleSubmit = useCallback((updatedUser: UserModel) => {
+    setUser(updatedUser);
+  }, []);
+
   if (!user) return <></>;
   return (
     <div className="user">
-      <Single user={user} />
+      <Single user={user} onSubmit={handleSubmit} />
     </div>
   );
 };
