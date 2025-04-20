@@ -25,7 +25,9 @@ type MessagesListProps = {
 };
 
 export const MessagesList = ({ selectedChat }: MessagesListProps) => {
-  const { _id } = useSelector(userSelectors.currentUser()) as UserModel;
+  const { _id, username } = useSelector(
+    userSelectors.currentUser()
+  ) as UserModel;
   const formMethods = useForm<SupportChatForm>({
     defaultValues: {
       [SUPPORT_CHAT_FORM_CONFIG.INPUTS.MESSAGE.KEY]:
@@ -40,7 +42,7 @@ export const MessagesList = ({ selectedChat }: MessagesListProps) => {
   const loadChatMessages = async () => {
     if (!selectedChat) return;
 
-    const response = await supportChatApiService.getById(selectedChat.chatId);
+    const response = await supportChatApiService.getById(selectedChat.userId);
     if (!response.isSucceeded || !response.data?.content) return;
 
     setMessages(response.data.content.messages);
@@ -59,9 +61,12 @@ export const MessagesList = ({ selectedChat }: MessagesListProps) => {
     async ({ message }: SupportChatForm) => {
       if (!selectedChat || !message) return;
       const request: CreateSupportChatRequest = {
-        receiverId: selectedChat?.chatId,
+        chatId: selectedChat._id,
+        senderId: _id,
+        receiverId: selectedChat.userId,
         message,
-        userId: _id,
+        isUserSender: false,
+        senderName: username,
       };
 
       const response = await supportChatApiService.create(request);
@@ -70,7 +75,7 @@ export const MessagesList = ({ selectedChat }: MessagesListProps) => {
       setMessages([...messages, response.data.content]);
       formMethods.reset();
     },
-    [scrollToBottom, listRef, messages]
+    [scrollToBottom, listRef, messages, selectedChat, _id, username]
   );
 
   return (

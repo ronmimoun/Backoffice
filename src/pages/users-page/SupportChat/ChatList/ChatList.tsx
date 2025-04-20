@@ -24,9 +24,9 @@ export const ChatList = ({ chats, onClick, selectedChat }: ChatListProps) => {
       {chats.map((chat) => {
         return (
           <ListItem
-            key={chat.chatId}
+            key={chat._id}
             className={`${classes.chat} ${
-              selectedChat?.chatId === chat.chatId ? classes.chat_selected : ""
+              selectedChat?._id === chat._id ? classes.chat_selected : ""
             }`}
             onClick={() => handleChatSelection(chat)}
           >

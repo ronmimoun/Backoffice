@@ -37,7 +37,7 @@ const create = async (
 ): Promise<ApiResponse<CreateSupportChatResponse>> => {
   const options = {
     method: "post",
-    url: "/support_chat/admin-msg",
+    url: "/support_chat/sendMessage",
     data: requestPayload,
   };
 

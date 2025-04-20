@@ -1,5 +1,8 @@
 export type CreateSupportChatRequest = {
-  userId: string;
-  message: string;
+  chatId: string;
+  senderId: string;
   receiverId: string;
+  message: string;
+  isUserSender: boolean;
+  senderName: string;
 };

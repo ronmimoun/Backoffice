@@ -1,9 +1,10 @@
 export type ChatModel = {
-  chatId: string;
+  _id: string;
   fullname: string;
   chatImg: string;
   username: string;
   messages: MessageModel[];
+  userId: string;
 };
 
 export type MessageModel = {
