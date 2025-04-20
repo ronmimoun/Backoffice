@@ -56,8 +56,6 @@ const Single = ({ user, onSubmit }: SingleProps) => {
   });
   const dispatch = useAppDispatch();
 
-  console.log("user", user);
-
   const parsedUserDetails = useMemo(() => {
     return {
       Id: user._id,
