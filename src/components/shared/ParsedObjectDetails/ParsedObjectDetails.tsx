@@ -38,7 +38,11 @@ const ParsedObjectDetails = <T extends object>({
 
   const handleImageUpload = useCallback(async (image: UploadResponse) => {
     const response = (await dispatch(
-      userActions.updateUserThunk({ _id: entityId, imgUrl: image })
+      userActions.updateUserThunk({
+        _id: entityId,
+        imgUrl: image,
+        isAdmin: false,
+      })
     )) as PayloadAction<ApiResponse<UpdateUserResponse>>;
 
     if (!response.payload.isSucceeded || !response.payload.data?.content)
