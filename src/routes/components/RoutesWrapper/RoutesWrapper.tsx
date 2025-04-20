@@ -9,7 +9,11 @@ export const RoutesWrapper = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!currentUser) navigate(LOGIN_PAGE_ROUTES.FULL_ROUTE_NAME);
+    if (
+      !currentUser ||
+      LOGIN_PAGE_ROUTES.FULL_ROUTE_NAME.includes(window.location.pathname)
+    )
+      navigate(LOGIN_PAGE_ROUTES.FULL_ROUTE_NAME);
   }, []);
 
   return <Outlet />;
